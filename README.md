@@ -40,4 +40,4 @@ Het versienummer staat onderaan de instellingen, in de vorm `v2026.09.07 22:16`.
 
 ## Licentie
 
-MIT. Loopt je klasgenoot stage in een garage of een keuken, dan pas je de takenlijst gewoon aan in de instellingen. Daar hoeft geen code voor gewijzigd.
+MIT, je krijgt de vrije teugels. De app is niet aan paarden gebonden: wie stage loopt in een garage of een keuken zet er gewoon andere taken in.
