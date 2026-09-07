@@ -1,0 +1,1721 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="mobile-web-app-capable" content="yes">
+<!-- Statusbalk volgt automatisch de licht/donker instelling van het toestel -->
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#24262a" media="(prefers-color-scheme: dark)">
+<title>Hippolog</title>
+<meta name="application-name" content="Hippolog">
+<meta name="apple-mobile-web-app-title" content="Hippolog">
+<meta name="description" content="Log je werkdagen op stal. Uren, taken en notities, gewoon in je browser. Alles blijft op je eigen toestel.">
+<!-- Deelkaart voor WhatsApp, Messenger en co -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hippolog">
+<meta property="og:description" content="Log je werkdagen op stal. Uren, taken en notities, gewoon in je browser. Alles blijft op je eigen toestel.">
+<meta property="og:url" content="https://hippolog.net/">
+<meta name="twitter:card" content="summary">
+<!-- Favicon (hoefijzer) en beginscherm-icoon, ingebed zodat er geen extra bestanden nodig zijn -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22512%22%20height%3D%22512%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2222%22%20fill%3D%22%2316a34a%22%2F%3E%3Cpath%20d%3D%22M65.6%2032.4%20A22%2022%200%201%201%2034.4%2032.4%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-width%3D%2214%22%20stroke-linecap%3D%22round%22%2F%3E%3Cg%20fill%3D%22%2316a34a%22%3E%3Ccircle%20cx%3D%2271.3%22%20cy%3D%2253.7%22%20r%3D%222.2%22%2F%3E%3Ccircle%20cx%3D%2266.9%22%20cy%3D%2262.1%22%20r%3D%222.2%22%2F%3E%3Ccircle%20cx%3D%2255.7%22%20cy%3D%2269.3%22%20r%3D%222.2%22%2F%3E%3Ccircle%20cx%3D%2244.3%22%20cy%3D%2269.3%22%20r%3D%222.2%22%2F%3E%3Ccircle%20cx%3D%2233.1%22%20cy%3D%2262.1%22%20r%3D%222.2%22%2F%3E%3Ccircle%20cx%3D%2228.7%22%20cy%3D%2253.7%22%20r%3D%222.2%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E">
+<link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,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">
+<style>
+  /* ===== Basisvariabelen (licht thema) ===== */
+  :root{
+    /* Laat native onderdelen (tijd- en datumkiezer) mee schakelen met het toestel */
+    color-scheme: light dark;
+    --bg: #f4f4f2;
+    --card-bg: #ffffff;
+    --text: #1a1a1a;
+    --text-dim: #6b6b6b;
+    --border: #e2e2e0;
+    --accent-green: #16a34a;
+    --accent-red: #dc2626;
+    --input-bg: #fbfbfa;
+    --sheet-bg: #ffffff;
+    --overlay: rgba(0,0,0,0.45);
+    --shadow: 0 2px 10px rgba(0,0,0,0.08);
+    /* Header: zachte verloop van wit naar de paginakleur, geen harde rand */
+    --header-top: #ffffff;
+    --header-bottom: #fafaf8;
+    --header-glow: rgba(0,0,0,0.06);
+    --hairline: rgba(0,0,0,0.07);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg: #17181a;
+      --card-bg: #202124;
+      --text: #f0f0ee;
+      --text-dim: #9a9a9a;
+      --border: #35363a;
+      --accent-green: #22c55e;
+      --accent-red: #ef4444;
+      --input-bg: #26272a;
+      --sheet-bg: #202124;
+      --overlay: rgba(0,0,0,0.6);
+      --shadow: 0 2px 10px rgba(0,0,0,0.4);
+      --header-top: #24262a;
+      --header-bottom: #1c1d20;
+      --header-glow: rgba(0,0,0,0.5);
+      --hairline: rgba(255,255,255,0.09);
+    }
+  }
+  *{ box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html,body{ margin:0; padding:0; background:var(--bg); color:var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  body{
+    display:flex; justify-content:center;
+  }
+  /* De pagina zelf scrollt (geen apart scrollvenster binnenin), zodat de
+     adresbalk van de telefoon wegschuift en alles bereikbaar blijft. */
+  #app{
+    width:100%; max-width:480px;
+    min-height:100vh; min-height:100dvh;
+    display:flex; flex-direction:column;
+    background:var(--bg);
+    position:relative;
+  }
+
+  /* ===== Header ===== */
+  header{
+    position:sticky; top:0; z-index:20;
+    background:linear-gradient(180deg, var(--header-top) 0%, var(--header-top) 70%, var(--header-bottom) 100%);
+    -webkit-backdrop-filter:saturate(180%) blur(14px);
+    backdrop-filter:saturate(180%) blur(14px);
+    border:none; border-radius:0;
+    padding: 4px 14px 8px;
+    padding-top: max(4px, env(safe-area-inset-top,0px));
+  }
+  /* Zachte overgang onder de header, zodat de achtergrond niet abrupt stopt */
+  header::after{
+    content:""; position:absolute; left:0; right:0; bottom:-14px; height:14px;
+    background:linear-gradient(180deg, var(--header-bottom) 0%, transparent 100%);
+    pointer-events:none;
+  }
+  /* De datum staat exact in het midden van de volledige schermbreedte.
+     Het status-bolletje hangt ernaast en telt niet mee voor die centrering. */
+  .date-row{
+    position:relative; display:flex; align-items:center;
+    justify-content:space-between; min-height:40px;
+  }
+  .nav-btn{
+    background:none; border:1px solid var(--hairline); font-size:18px; line-height:1;
+    color:var(--text-dim); width:32px; height:32px; flex:0 0 32px; padding:0;
+    border-radius:50%; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition:background .15s ease, color .15s ease;
+  }
+  .nav-btn:active{ background:var(--input-bg); color:var(--text); }
+  .date-label{
+    position:absolute; left:50%; transform:translateX(-50%);
+    text-align:center; font-size:17px; font-weight:600; letter-spacing:-.01em;
+    padding:6px 8px; border-radius:12px; cursor:pointer;
+    white-space:nowrap;
+  }
+  .date-label:active{ background:var(--input-bg); }
+  #datePicker{
+    position:absolute; top:0; left:0; width:100%; height:100%;
+    opacity:0; border:none; background:transparent; padding:0; margin:0;
+    -webkit-appearance:none; appearance:none;
+    font-size:16px; /* voorkomt inzoomen bij focus op iOS */
+    cursor:pointer; z-index:2;
+  }
+  .status-dot{
+    position:absolute; left:100%; top:50%; transform:translateY(-50%);
+    margin-left:8px;
+    width:26px; height:26px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:14px; font-weight:bold; border:2px solid transparent;
+    transition:background .2s ease, border-color .2s ease;
+    pointer-events:none;
+  }
+  .status-dot.known{ background: color-mix(in srgb, var(--accent-green) 18%, transparent); color:var(--accent-green); border-color:var(--accent-green); }
+  .status-dot.unknown{ background: color-mix(in srgb, var(--accent-red) 15%, transparent); color:var(--accent-red); border-color:var(--accent-red); }
+
+  .time-row{
+    display:flex; gap:8px; margin-top:6px;
+  }
+  .time-field{
+    flex:1 1 0; min-width:0;
+    display:flex; align-items:baseline; gap:6px;
+    background:var(--input-bg); border:1px solid var(--hairline);
+    border-radius:12px; padding:5px 9px;
+  }
+  .time-field label{
+    font-size:11px; color:var(--text-dim); flex:0 0 auto;
+    text-transform:uppercase; letter-spacing:.05em; font-weight:600;
+  }
+  .time-field input[type=time]{
+    width:100%; max-width:100%; min-width:0; box-sizing:border-box;
+    font-size:17px; font-weight:600; letter-spacing:-.01em; border:none;
+    background:transparent; color:var(--text); padding:0; font-family:inherit;
+    text-align:right;
+  }
+  .time-field:focus-within{ border-color:var(--accent-green); }
+  .time-field input[type=time]:focus{ outline:none; }
+
+  /* ===== Body ===== */
+  main{ flex:1; padding:22px 16px 20px; }
+  .section-label{
+    font-size:14px; font-weight:600; margin: 4px 0 8px;
+  }
+  textarea#notes{
+    width:100%; min-height: 5.2em; resize:vertical; border-radius:14px;
+    border:1px solid var(--border); background:var(--input-bg); color:var(--text);
+    font-size:16px; padding:10px 12px; font-family:inherit; line-height:1.4;
+  }
+  textarea#notes:focus{ outline:none; border-color:var(--accent-green); }
+
+  .group{ margin-top:22px; }
+  .group-title{
+    font-size:13px; font-weight:700; letter-spacing:.06em; color:var(--text-dim);
+    text-transform:uppercase; margin-bottom:6px;
+  }
+  .task-list{ border-radius:14px; overflow:hidden; background:var(--card-bg); border:1px solid var(--border); }
+  .task-row{
+    display:flex; align-items:center; gap:12px;
+    min-height:48px; padding:10px 14px;
+    border-bottom:1px solid var(--border);
+    cursor:pointer; user-select:none;
+  }
+  .task-row:last-child{ border-bottom:none; }
+  .task-row:active{ background:var(--input-bg); }
+  .checkbox{
+    width:26px; height:26px; flex:0 0 26px; border-radius:8px;
+    border:2px solid var(--border); position:relative; background:var(--input-bg);
+  }
+  .checkbox.checked{ background:var(--accent-green); border-color:var(--accent-green); }
+  .checkbox.checked::after{
+    content:''; position:absolute; left:6px; top:2px; width:7px; height:13px;
+    border:solid white; border-width:0 3px 3px 0; transform:rotate(45deg);
+  }
+  .task-name{ font-size:16px; flex:1; }
+
+  /* ===== Footer ===== */
+  /* Voetbalk staat helemaal onderaan de pagina, niet vastgeplakt in beeld:
+     ze scrolt mee en komt pas na de laatste taak tevoorschijn. */
+  footer{
+    background:transparent; border:none;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:12px;
+    padding: 8px 16px 0;
+  }
+  /* Loze ruimte onder de knoppen. Safari houdt de onderste strook van het
+     scherm vrij voor zijn eigen balk: een tik daar laat die balk verschijnen
+     in plaats van de knop te raken. Deze marge houdt de knoppen uit die zone. */
+  .bottom-space{
+    height: calc(96px + env(safe-area-inset-bottom,0px));
+    flex:0 0 auto;
+    display:flex; align-items:center; justify-content:center;
+    padding-bottom: env(safe-area-inset-bottom,0px);
+  }
+  .horse-egg{
+    font-size:26px; line-height:1; text-decoration:none;
+    padding:10px 14px; border-radius:12px;
+    transition:transform .2s ease;
+  }
+  .horse-egg:active{ transform:scale(1.15); }
+  .icon-btn{
+    background:none; border:none; padding:10px; border-radius:10px; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; color:var(--text);
+  }
+  .icon-btn:active{ background:var(--input-bg); }
+  #saveBtn{
+    flex:1; background:var(--accent-green); color:#fff; border:none;
+    font-size:16px; font-weight:600;
+    padding:14px 26px; border-radius:14px; cursor:pointer;
+  }
+  #saveBtn:active{ opacity:.85; }
+
+  .save-toast{
+    position:fixed; left:50%; bottom:calc(24px + env(safe-area-inset-bottom,0px));
+    transform:translateX(-50%);
+    background:var(--accent-red); color:#fff; padding:10px 18px; border-radius:20px;
+    font-size:14px; font-weight:600; opacity:0; pointer-events:none;
+    transition:opacity .3s ease; z-index:60; white-space:nowrap;
+    box-shadow:0 4px 14px rgba(0,0,0,0.25);
+  }
+  .save-toast.show{ opacity:1; }
+
+  /* ===== Instellingen: schermvullend venster ===== */
+  .sheet-overlay{
+    position:fixed; inset:0; background:var(--bg); z-index:80;
+    opacity:0; pointer-events:none; transition:opacity .18s ease;
+    display:flex; justify-content:center;
+  }
+  .sheet-overlay.open{ opacity:1; pointer-events:auto; }
+  .sheet{
+    width:100%; max-width:480px; height:100%;
+    background:var(--sheet-bg);
+    display:flex; flex-direction:column;
+    transform:translateY(12px); transition:transform .2s ease-out;
+  }
+  .sheet-overlay.open .sheet{ transform:translateY(0); }
+  /* Titelbalk met sluitkruisje rechtsboven */
+  .sheet-top{
+    flex:0 0 auto; display:flex; align-items:center; justify-content:space-between;
+    gap:12px; padding:8px 8px 8px 16px;
+    padding-top: max(8px, env(safe-area-inset-top,0px));
+    border-bottom:1px solid var(--hairline);
+  }
+  .sheet-top h2{ margin:0; font-size:18px; }
+  .sheet-x{
+    flex:0 0 40px; width:40px; height:40px; border:none; background:none;
+    color:var(--text); font-size:26px; line-height:1; border-radius:50%;
+    cursor:pointer; display:flex; align-items:center; justify-content:center;
+  }
+  .sheet-x:active{ background:var(--input-bg); }
+  /* Alleen dit deel scrolt */
+  .sheet-body{ flex:1 1 auto; overflow-y:auto; -webkit-overflow-scrolling:touch; padding:0 16px 24px; }
+  /* Sluitknop onderaan, schermbreed */
+  .sheet-foot{
+    flex:0 0 auto; padding:12px 16px;
+    padding-bottom: calc(16px + env(safe-area-inset-bottom,0px));
+    border-top:1px solid var(--hairline); background:var(--sheet-bg);
+  }
+  .sheet h2{ font-size:18px; margin:14px 0 8px; }
+  .sheet h3{ font-size:14px; margin:16px 0 6px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.05em; }
+  .weekday-row{
+    display:flex; align-items:center; gap:8px; padding:8px 0; border-bottom:1px solid var(--border);
+  }
+  .weekday-row .wd-name{ width:34px; font-weight:600; font-size:14px; }
+  .toggle{
+    width:42px; height:24px; border-radius:12px; background:var(--border); position:relative; border:none; cursor:pointer; flex:0 0 42px;
+  }
+  .toggle.on{ background:var(--accent-green); }
+  .toggle::after{
+    content:''; position:absolute; top:2px; left:2px; width:20px; height:20px; border-radius:50%;
+    background:#fff; transition: left .18s ease;
+  }
+  .toggle.on::after{ left:20px; }
+  .weekday-row input[type=time]:disabled{ opacity:.35; }
+  .weekday-row input[type=time]{
+    font-size:14px; border:none; border-bottom:1px solid var(--border); background:transparent; color:var(--text);
+    width:76px; padding:4px 2px; font-family:inherit;
+  }
+  .group-block{ border:1px solid var(--border); border-radius:12px; padding:10px 12px; margin-bottom:10px; background:var(--input-bg); }
+  .group-block-head{ display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+  .group-block-head input[type=text]{
+    flex:1 1 0; min-width:0; /* zodat de knop ernaast niet uit de kader duwt */
+    font-size:15px; font-weight:600; border:none; border-bottom:1px solid var(--border);
+    background:transparent; color:var(--text); padding:4px 2px; font-family:inherit;
+  }
+  .task-edit-row{ display:flex; align-items:center; gap:6px; padding:6px 0; background:var(--input-bg); }
+  /* Sleepgreepje voor het herschikken van groepen en taken */
+  .drag-handle{
+    flex:0 0 auto; display:flex; align-items:center; justify-content:center;
+    width:30px; height:34px; margin-left:-4px;
+    color:var(--text-dim); cursor:grab;
+    touch-action:none; /* zodat slepen niet als scrollen wordt gelezen */
+  }
+  .drag-handle:active{ cursor:grabbing; }
+  .dragging{
+    opacity:.9; box-shadow:0 6px 18px rgba(0,0,0,0.2);
+    border-radius:10px; position:relative; z-index:5;
+  }
+  .drag-hint{ font-size:12px; color:var(--text-dim); margin:2px 0 8px; }
+  .group-block{ overflow:hidden; }
+  .task-edit-row input[type=text]{
+    flex:1; font-size:14px; border:none; border-bottom:1px solid var(--border);
+    background:transparent; color:var(--text); padding:4px 2px; font-family:inherit;
+  }
+  .small-btn{
+    border:1px solid var(--border); background:var(--card-bg); color:var(--text);
+    border-radius:8px; padding:6px 10px; font-size:13px; cursor:pointer;
+    white-space:nowrap; flex:0 0 auto; font-family:inherit;
+  }
+  .small-btn.danger{ color:var(--accent-red); border-color:var(--accent-red); }
+  .add-btn{
+    display:inline-block; margin-top:4px; background:none; border:1px dashed var(--border);
+    color:var(--text-dim); border-radius:8px; padding:6px 10px; font-size:13px; cursor:pointer; width:100%;
+  }
+  .file-actions{ display:flex; flex-direction:column; gap:10px; margin:10px 0; }
+  .wide-btn{
+    background:var(--input-bg); border:1px solid var(--border); color:var(--text);
+    padding:12px; border-radius:12px; font-size:15px; cursor:pointer; text-align:center;
+  }
+  .text-link{
+    display:block; width:100%; margin:12px 0 0; padding:6px 0;
+    background:none; border:none; font-family:inherit; font-size:14px;
+    color:var(--accent-green); text-decoration:underline; text-align:left;
+    cursor:pointer;
+  }
+  /* Uitlegvenster */
+  .help-body p{ font-size:15px; line-height:1.55; margin:0 0 12px; }
+  .help-body h3{ margin:22px 0 6px; }
+  .help-body ol{ font-size:15px; line-height:1.55; padding-left:20px; margin:0 0 12px; }
+  .help-body li{ margin-bottom:6px; }
+  .prompt-box{
+    background:var(--input-bg); border:1px solid var(--border); border-radius:12px;
+    padding:12px 14px; font-size:13px; line-height:1.5; white-space:pre-wrap;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    max-height:none; overflow-x:auto;
+  }
+  .note-box{
+    background:var(--input-bg); border-left:3px solid var(--accent-green);
+    border-radius:0 10px 10px 0; padding:10px 14px; font-size:14px; line-height:1.5;
+    margin:0 0 12px;
+  }
+  .stat-line{ font-size:13px; color:var(--text-dim); margin:12px 0 4px; }
+  .sheet-outro{ text-align:center; margin-top:26px; }
+  .outro-divider{
+    width:80%; margin:0 auto 18px; border:none;
+    border-top:1px solid var(--border);
+  }
+  /* Spreuk en ondertekening delen hetzelfde lettertype en formaat */
+  .outro-quote,
+  .outro-credit{ font-size:13px; color:var(--text-dim); margin:0 0 10px; }
+  .outro-quote{ margin-bottom:6px; }
+  .outro-mark{ margin:14px 0 10px; line-height:0; }
+  .outro-mark svg{ border-radius:11px; }
+  .outro-credit a{ color:inherit; text-decoration:underline; }
+  .version-line{
+    font-size:11px; color:var(--text-dim); opacity:.7;
+    margin:0; letter-spacing:.03em; font-variant-numeric:tabular-nums;
+  }
+  .sheet-close{
+    display:block; width:100%; background:none;
+    border:2px solid var(--border); color:var(--text);
+    font-size:17px; font-weight:600; font-family:inherit;
+    padding:15px 16px; border-radius:14px; cursor:pointer;
+  }
+  .sheet-close:active{ background:var(--input-bg); }
+
+  /* ===== Modals ===== */
+  .modal-overlay{
+    position:fixed; inset:0; background:var(--overlay); z-index:100;
+    display:flex; align-items:center; justify-content:center; padding:24px;
+    opacity:0; pointer-events:none; transition:opacity .2s ease;
+  }
+  .modal-overlay.open{ opacity:1; pointer-events:auto; }
+  .modal-box{
+    background:var(--sheet-bg); border-radius:16px; padding:20px; max-width:400px; width:100%;
+    max-height:80vh; overflow-y:auto; box-shadow:var(--shadow);
+  }
+  .modal-box h3{ margin-top:0; font-size:17px; }
+  .modal-box p{ font-size:14px; color:var(--text-dim); line-height:1.5; }
+  .modal-actions{ display:flex; gap:10px; justify-content:flex-end; margin-top:18px; }
+  .modal-btn{ padding:10px 18px; border-radius:10px; border:none; font-size:14px; cursor:pointer; }
+  .modal-btn.primary{ background:var(--accent-green); color:#fff; }
+  .modal-btn.secondary{ background:var(--input-bg); color:var(--text); border:1px solid var(--border); }
+  .modal-btn.danger{ background:var(--accent-red); color:#fff; }
+  #mdPreview{
+    width:100%; min-height:200px; font-family: ui-monospace, monospace; font-size:12px;
+    background:var(--input-bg); border:1px solid var(--border); border-radius:10px; padding:8px; color:var(--text);
+  }
+
+  input, textarea, select{ font-size:16px; } /* voorkomt zoom bij focus op iOS */
+  ::selection{ background: color-mix(in srgb, var(--accent-green) 30%, transparent); }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <header>
+    <div class="date-row">
+      <button class="nav-btn" id="prevDay" aria-label="Vorige dag">&#8249;</button>
+      <div class="date-label" id="dateLabel">
+        --
+        <input type="date" id="datePicker">
+        <div class="status-dot unknown" id="statusDot">?</div>
+      </div>
+      <button class="nav-btn" id="nextDay" aria-label="Volgende dag">&#8250;</button>
+    </div>
+    <div class="time-row">
+      <div class="time-field">
+        <label for="startTime">Startuur</label>
+        <input type="time" id="startTime">
+      </div>
+      <div class="time-field">
+        <label for="endTime">Einduur</label>
+        <input type="time" id="endTime">
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="section-label">Vandaag heb ik dit gedaan:</div>
+    <textarea id="notes" placeholder="Schrijf hier wat je vandaag deed..."></textarea>
+    <div id="groupsContainer"></div>
+  </main>
+
+  <footer>
+    <button class="icon-btn" id="settingsBtn" aria-label="Instellingen">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"></circle>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+      </svg>
+    </button>
+    <button id="saveBtn" data-native-tap>Backup bewaren</button>
+  </footer>
+
+  <!-- Ademruimte onder de knoppen, buiten het bereik van de Safari-balk.
+       Het paardje wisselt per dag en is een verstopt linkje. -->
+  <div class="bottom-space">
+    <a class="horse-egg" id="horseEgg" href="https://giphy.com/search/funny-horse"
+       target="_blank" rel="noopener" aria-label="Grappige paarden">&#128052;</a>
+  </div>
+
+  <!-- ===== Instellingen bottom sheet ===== -->
+  <div class="sheet-overlay" id="settingsOverlay">
+    <div class="sheet" id="settingsSheet" role="dialog" aria-modal="true" aria-label="Instellingen">
+      <div class="sheet-top">
+        <h2>Instellingen</h2>
+        <button class="sheet-x" id="closeSettingsX" aria-label="Sluiten">&times;</button>
+      </div>
+      <div class="sheet-body">
+
+      <h3>Werkdagen &amp; uren</h3>
+      <div id="weekdaysContainer"></div>
+
+      <h3>Taken beheren</h3>
+      <div id="groupsEditContainer"></div>
+      <button class="add-btn" id="addGroupBtn">+ Groep toevoegen</button>
+
+      <h3>Bestand</h3>
+      <div class="file-actions">
+        <button class="wide-btn" id="exportBtn" data-native-tap>Exporteer .md</button>
+        <button class="wide-btn" id="importBtn" data-native-tap>Importeer .md</button>
+        <input type="file" id="importFile" accept=".md,text/markdown" style="display:none">
+      </div>
+      <button class="text-link" id="helpBtn">Wat doe je met dit .md bestand?</button>
+      <div class="stat-line" id="dayCountLine">0 dagen gelogd</div>
+
+      <!-- Afsluiter: streepje, spreuk, ondertekening en het versienummer -->
+      <div class="sheet-outro">
+        <hr class="outro-divider">
+        <p class="outro-quote">Happy horse, happy heart</p>
+        <p class="outro-credit">Made with &#10084;&#65039; by
+          <a href="https://github.com/kristofboeckx" target="_blank" rel="noopener">Kristof Boeckx</a>
+        </p>
+        <div class="outro-mark" aria-hidden="true">
+          <svg width="48" height="48" viewBox="0 0 100 100">
+            <rect width="100" height="100" rx="22" fill="#16a34a"/>
+            <path d="M65.6 32.4 A22 22 0 1 1 34.4 32.4" fill="none" stroke="#ffffff" stroke-width="14" stroke-linecap="round"/>
+            <g fill="#16a34a">
+              <circle cx="71.3" cy="53.7" r="2.2"/><circle cx="66.9" cy="62.1" r="2.2"/>
+              <circle cx="55.7" cy="69.3" r="2.2"/><circle cx="44.3" cy="69.3" r="2.2"/>
+              <circle cx="33.1" cy="62.1" r="2.2"/><circle cx="28.7" cy="53.7" r="2.2"/>
+            </g>
+          </svg>
+        </div>
+        <!-- Versie: wordt bij elke nieuwe build automatisch bijgewerkt (zie APP_VERSION) -->
+        <p class="version-line" id="versionLine">Hippolog</p>
+      </div>
+
+      </div><!-- /sheet-body -->
+
+      <div class="sheet-foot">
+        <button class="sheet-close" id="closeSettings">Sluiten</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===== Uitleg: wat doe je met het .md bestand ===== -->
+  <div class="sheet-overlay" id="helpOverlay">
+    <div class="sheet" role="dialog" aria-modal="true" aria-label="Wat doe je met dit bestand">
+      <div class="sheet-top">
+        <h2>Wat doe je hiermee?</h2>
+        <button class="sheet-x" id="closeHelpX" aria-label="Sluiten">&times;</button>
+      </div>
+      <div class="sheet-body help-body">
+
+        <h3>1. Het is je backup</h3>
+        <p>Alles wat je invult, staat op dit toestel zelf. Raak je je telefoon kwijt of wis je de gegevens van je browser, dan is je logboek weg. Daarom druk je af en toe op <strong>Backup bewaren</strong> en zet je dat .md bestand ergens veilig, bijvoorbeeld in Bestanden of in je iCloud.</p>
+        <div class="note-box">Eén bestand bevat al je dagen, van de recentste naar de oudste. Je hebt er dus maar één nodig, en het mag gerust een heel schooljaar lang aangroeien.</div>
+
+        <h3>2. Er komt een weekverslag uit</h3>
+        <p>Je leerkracht wil weten wat je op je werkplek gedaan hebt. In plaats van dat zelf elke week uit te typen, laat je een AI het verslag schrijven op basis van je logboek. Jij leest het na, past aan waar het niet klopt, en stuurt het door.</p>
+
+        <h3>3. Zo doe je dat</h3>
+        <ol>
+          <li>Druk op <strong>Backup bewaren</strong> en bewaar het bestand.</li>
+          <li>Open ChatGPT, Gemini of Claude.</li>
+          <li>Voeg het .md bestand toe aan je bericht.</li>
+          <li>Plak de prompt hieronder erbij en verstuur.</li>
+          <li>Lees het verslag na. Klopt er iets niet, verbeter het zelf.</li>
+        </ol>
+
+        <h3>De prompt</h3>
+        <p>Kopieer deze tekst en plak ze bij je bestand.</p>
+        <div class="prompt-box" id="promptText">Dit bestand is mijn werklogboek van mijn werkplek. Per dag staat erin: de datum, mijn start- en einduur, een notitie in mijn eigen woorden, en de taken die ik heb afgevinkt. Het bestand kan een heel schooljaar bevatten, met de recentste dag bovenaan.
+
+Schrijf een kort verslag van de laatste volledige week (maandag tot en met zondag) die al voorbij is. Gebruik alleen de dagen uit die week en negeer al de rest.
+
+Zo wil ik het verslag:
+- platte tekst, geen opmaak, geen koppen, geen sterretjes of streepjes
+- gewone regeleindes en een lege regel tussen de stukken, zodat het leesbaar blijft
+- begin met de periode, bijvoorbeeld: Verslag van maandag 1 tot en met zondag 7 september
+- daarna per gewerkte dag een korte alinea: de dag en datum, mijn uren, en in vloeiende zinnen wat ik die dag deed
+- sluit af met twee of drie zinnen over de week: hoeveel uur ik in totaal werkte en welke taken het vaakst terugkwamen
+- schrijf in de ik-vorm, in het Nederlands, zakelijk maar vlot
+- ongeveer 150 tot 250 woorden
+- verzin niets bij, gebruik alleen wat in het bestand staat
+
+Staan er voor die week geen dagen in het bestand, zeg dat dan gewoon.</div>
+        <button class="wide-btn" id="copyPromptBtn" data-native-tap style="width:100%;margin-top:10px">Kopieer de prompt</button>
+
+        <h3>Nog dit</h3>
+        <p>De AI ziet alleen wat jij invulde. Vul je niets in, dan valt er ook niets te schrijven. Een korte notitie per dag maakt het verslag meteen een pak beter dan enkel aangevinkte vakjes.</p>
+
+      </div>
+      <div class="sheet-foot">
+        <button class="sheet-close" id="closeHelp">Sluiten</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Bevestigingsmodal (import) ===== -->
+  <div class="modal-overlay" id="confirmOverlay">
+    <div class="modal-box">
+      <h3 id="confirmTitle">Ben je zeker?</h3>
+      <p id="confirmBody"></p>
+      <div class="modal-actions">
+        <button class="modal-btn secondary" id="confirmCancel">Annuleren</button>
+        <button class="modal-btn danger" id="confirmOk">Ja</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Fallback modal voor export tonen ===== -->
+  <div class="modal-overlay" id="mdOverlay">
+    <div class="modal-box">
+      <h3>Hippolog export</h3>
+      <p>Delen/downloaden lukte niet automatisch. Kopieer de tekst hieronder.</p>
+      <textarea id="mdPreview" readonly></textarea>
+      <div class="modal-actions">
+        <button class="modal-btn secondary" id="mdClose">Sluiten</button>
+        <button class="modal-btn primary" id="mdCopy">Kopieer</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="save-toast" id="saveToast" role="alert">Probleem bij opslaan</div>
+</div>
+
+<script>
+/* =========================================================================
+   HIPPOLOG - werk-logtool voor jobstudent op een paardenbedrijf
+   Alles in één bestand: geen externe libraries, werkt offline na eerste load.
+   ========================================================================= */
+
+(function(){
+  'use strict';
+
+  /* Versienummer van deze build. Wordt bij elke nieuwe versie bijgewerkt
+     naar het tijdstip van de build (Europe/Brussels), formaat vJJJJ.MM.DD UU:MM.
+     Verschijnt onderaan het instellingenmenu. */
+  var APP_VERSION = 'v2026.09.07 22:16';
+
+  /* Beginscherm-iconen. Het manifest wordt bij het laden als blob aangemaakt,
+     zodat alles in dit ene bestand kan blijven zitten. */
+  var ICON_192 = 'data:image/png;base64,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';
+  var ICON_512 = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAIAAAB7GkOtAAAQAElEQVR4nOzdB3QWVd7H8X9675WEEEiA0HsvghQL9oq9rL23VVdX14aCrr2tvWHvroogSO8dQu8hIaSQACGF9PcK7/FwdEWSZ2aembnfz3lOToBAyDN35jf3f+/c6584cYwAAPTjLwAALREAAKApAgAANEUAAICmCAAA0BQBAACaIgAAQFMEAABoigAAAE0RAACgKQIAADRFAACApggAANAUAQAAmiIAAEBTBAAAaIoAAABNEQAAoCkCAAA0RQAAgKYIAADQFAEAAJoiAABAUwQAAGiKAAAATREAAKApAgAANEUAAICmCAAA0BQBAACaIgAAQFMEAABoigAAAE0RAACgKQIAADRFAACApggAANAUAQAAmiIAAEBTBAAAaIoAAABNEQAAoCkCAAA0RQAAgKYIAADQFAEAAJoiAABAUwQAAGiKAAAATREAAKApAgAANEUAAICmCAAA0BQBAACaIgAAQFMEAABoigAAAE0RAACgKQIAADRFAACApggAANAUAQAAmiIAAEBTBAAAaIoAAABNEQAAoCkCAAA0RQAAgKYIAADQFAEAAJoiAABAUwQAAGiKAAAATREAAKApAgAANEUAAICmCAAA0BQBAACaIgAAQFMEAABoigAAAE0RAACgKQIAADRFAACApggAANAUAQAAmiIAAEBTBAAAaIoAAABNEQAAoCkCAAA0RQAAgKYIAADQFAEAAJoiAABAUwQAAGiKAAAATREAAKApAgAANEUAAICmCAAA0BQBAACaIgAAQFMEAABoigAAAE0RAACgKQIAADRFAACApggAANAUAQAAmiIAAEBTBAAAaIoAAABNEQAAoCkCAAA0RQAAgKYIAADQFAEAAJoiAABAUwQAAGiKAAAATREAAKApAgAANEUAAICmCAAA0BQBAACaIgAAQFMEAABoigAAAE0RAJpKCI7uHtcuNSwhJTS+RWhcckhcSlh8i5B4P1/f3ZV78itL1MdDr18/WV2ydVdlscA50sISu8ZmJofGHTq+8eqT1EMf6xsa8o84suqVV1G8smRTSXWZQD8+iRPHCLTRLbbtCS37jU7t1z2urY/4HPtfXLd3+5S8RVN3LV62Z6PAltQB7ZPQ4dDx7d8xOv3Y/2KjNK4s2Tw1b/HPuxZnl24VaIMA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';
+
+  /* Uren die een weekdag krijgt zodra je hem aanzet in de instellingen.
+     De dagen die vanaf het begin aanstaan (wo, do, vr) houden hun eigen uren
+     zolang je ze niet uit- en weer aanzet. */
+  var DEFAULT_START = '08:00';
+  var DEFAULT_END   = '17:00';
+
+  var STORAGE_KEY = 'hippolog.v1';
+  var WEEKDAY_SHORT = ['zo','ma','di','wo','do','vr','za'];      // index = date.getDay()
+  var WEEKDAY_FULL  = ['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag'];
+  var MONTH_SHORT   = ['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+
+  /* ---------- Hulpfuncties datum ---------- */
+  function pad(n){ return n < 10 ? '0' + n : '' + n; }
+  function toKey(d){ return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate()); }
+  function fromKey(key){
+    var parts = key.split('-').map(Number);
+    return new Date(parts[0], parts[1]-1, parts[2]);
+  }
+  function genId(prefix){
+    return prefix + '_' + Math.random().toString(36).slice(2,9) + Date.now().toString(36).slice(-4);
+  }
+
+  /* ---------- Standaardinstellingen ---------- */
+  function defaultSettings(){
+    return {
+      weekdays: {
+        1: { enabled:false, start:'', end:'' }, // ma
+        2: { enabled:false, start:'', end:'' }, // di
+        3: { enabled:true,  start:'08:00', end:'16:00' }, // wo
+        4: { enabled:true,  start:'07:30', end:'16:00' }, // do
+        5: { enabled:true,  start:'07:30', end:'16:00' }, // vr
+        6: { enabled:false, start:'', end:'' }, // za
+        0: { enabled:false, start:'', end:'' }  // zo
+      },
+      groups: [
+        { id:'g_paarden', name:'Paarden', tasks: [
+          { id:'t_hooi', name:'Hooi geven' },
+          { id:'t_wassen', name:'Wassen' },
+          { id:'t_longeren', name:'Longeren' },
+          { id:'t_opzadelen', name:'Opzadelen' },
+          { id:'t_rijden', name:'Rijden' },
+          { id:'t_wei', name:'In de wei zetten' },
+          { id:'t_piste', name:'In de piste loslaten' },
+          { id:'t_molen', name:'In de molen zetten' }
+        ]},
+        { id:'g_stallen', name:'Stallen', tasks: [
+          { id:'t_uitmesten', name:'Stal uitmesten' },
+          { id:'t_vegen', name:'Domein vegen' },
+          { id:'t_vuilbakken', name:'Vuilbakken leegmaken' }
+        ]}
+      ],
+      archivedTasks: {} // id -> naam, voor verwijderde taken die nog in oude logs staan
+    };
+  }
+
+  function defaultState(){
+    return { days: {}, settings: defaultSettings() };
+  }
+
+  /* ---------- Laden / opslaan localStorage ---------- */
+  function loadState(){
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return defaultState();
+      var parsed = JSON.parse(raw);
+      if(!parsed || typeof parsed !== 'object') return defaultState();
+      if(!parsed.days) parsed.days = {};
+      if(!parsed.settings) parsed.settings = defaultSettings();
+      if(!parsed.settings.weekdays) parsed.settings.weekdays = defaultSettings().weekdays;
+      if(!parsed.settings.groups) parsed.settings.groups = defaultSettings().groups;
+      if(!parsed.settings.archivedTasks) parsed.settings.archivedTasks = {};
+      return parsed;
+    } catch(e){
+      return defaultState();
+    }
+  }
+
+  function saveState(){
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      hideSaveError();
+      return true;
+    } catch(e){
+      // Opslag vol, of geblokkeerd (privemodus). Dit is het enige moment
+      // waarop we de gebruiker iets tonen: bij een geslaagde opslag zwijgen we.
+      showSaveError();
+      return false;
+    }
+  }
+
+  /* ========================================================================
+     MARKDOWN GENERATOR & PARSER
+     (puur functioneel: state in, resultaat uit — zo ook los testbaar)
+     ==================================================================== */
+
+  function generateMarkdown(st){
+    // lege dagen horen niet in de backup thuis
+    var keys = Object.keys(st.days).filter(function(k){
+      var d = st.days[k];
+      if (!d) return false;
+      if (d.notes && d.notes.trim() !== '') return true;
+      if (d.tasks){ for (var id in d.tasks){ if (d.tasks[id]) return true; } }
+      return false;
+    }).sort().reverse();
+    var lines = ['# Hippolog', ''];
+    for (var k=0; k<keys.length; k++){
+      var key = keys[k];
+      var day = st.days[key];
+      var d = fromKey(key);
+      var wd = WEEKDAY_FULL[d.getDay()];
+      lines.push('## ' + key + ' (' + wd + ')');
+      lines.push('- Uren: ' + (day.start||'') + ' - ' + (day.end||''));
+      if (day.notes && day.notes.trim() !== ''){
+        var noteLines = day.notes.split('\n');
+        lines.push('- Notitie: ' + noteLines[0]);
+        for (var i=1;i<noteLines.length;i++){
+          lines.push('  ' + noteLines[i]);
+        }
+      }
+      lines.push('');
+      var knownIds = {};
+      for (var g=0; g<st.settings.groups.length; g++){
+        var grp = st.settings.groups[g];
+        lines.push('### ' + grp.name);
+        for (var t=0; t<grp.tasks.length; t++){
+          var task = grp.tasks[t];
+          knownIds[task.id] = true;
+          var checked = !!(day.tasks && day.tasks[task.id]);
+          lines.push('- [' + (checked ? 'x' : ' ') + '] ' + task.name);
+        }
+        lines.push('');
+      }
+      // Gearchiveerde/verwijderde taken die in deze dag nog aangevinkt staan
+      var archivedIds = Object.keys(day.tasks || {}).filter(function(id){
+        return day.tasks[id] && !knownIds[id];
+      });
+      if (archivedIds.length){
+        lines.push('### Overig');
+        for (var a=0; a<archivedIds.length; a++){
+          var id = archivedIds[a];
+          var name = (st.settings.archivedTasks && st.settings.archivedTasks[id]) || id;
+          lines.push('- [x] ' + name);
+        }
+        lines.push('');
+      }
+    }
+    // overtollige lege regels aan het einde opruimen, netjes eindigen op 1 newline
+    var out = lines.join('\n');
+    out = out.replace(/\n+$/,'') + '\n';
+    return out;
+  }
+
+  function parseMarkdown(mdText, settings){
+    var lines = mdText.split(/\r?\n/);
+    var days = {};
+    var cur = null;         // { key, start, end, notes, taskEntries: [{group,name,checked}] }
+    var curGroup = null;
+    var collectingNote = false;
+    var noteLines = [];
+
+    function flushNote(){
+      if (cur && collectingNote){
+        cur.notes = noteLines.join('\n');
+      }
+      collectingNote = false;
+      noteLines = [];
+    }
+
+    function finalizeDay(){
+      if (!cur) return;
+      flushNote();
+      var dayTasks = {};
+      for (var i=0; i<cur.taskEntries.length; i++){
+        var entry = cur.taskEntries[i];
+        var group = null;
+        for (var g=0; g<settings.groups.length; g++){
+          if (settings.groups[g].name === entry.group){ group = settings.groups[g]; break; }
+        }
+        if (!group){
+          group = { id: genId('g'), name: entry.group, tasks: [] };
+          settings.groups.push(group);
+        }
+        var task = null;
+        for (var t=0; t<group.tasks.length; t++){
+          if (group.tasks[t].name === entry.name){ task = group.tasks[t]; break; }
+        }
+        if (!task){
+          task = { id: genId('t'), name: entry.name };
+          group.tasks.push(task);
+        }
+        if (entry.checked) dayTasks[task.id] = true;
+      }
+      days[cur.key] = {
+        start: cur.start || '',
+        end: cur.end || '',
+        notes: cur.notes || '',
+        tasks: dayTasks
+      };
+      cur = null;
+    }
+
+    for (var li=0; li<lines.length; li++){
+      var raw = lines[li];
+
+      var dm = raw.match(/^## (\d{4}-\d{2}-\d{2})/);
+      if (dm){
+        finalizeDay();
+        cur = { key: dm[1], start:'', end:'', notes:'', taskEntries:[] };
+        curGroup = null;
+        collectingNote = false;
+        noteLines = [];
+        continue;
+      }
+      if (!cur) continue;
+
+      var um = raw.match(/^- Uren: (.*) - (.*)$/);
+      if (um){
+        flushNote();
+        cur.start = um[1].trim();
+        cur.end = um[2].trim();
+        continue;
+      }
+
+      var nm = raw.match(/^- Notitie: (.*)$/);
+      if (nm){
+        flushNote();
+        collectingNote = true;
+        noteLines = [nm[1]];
+        continue;
+      }
+
+      if (collectingNote){
+        var cm = raw.match(/^  (.*)$/);
+        if (cm){
+          noteLines.push(cm[1]);
+          continue;
+        } else {
+          flushNote();
+          // val door naar normale verwerking van deze regel
+        }
+      }
+
+      var gm = raw.match(/^### (.+)$/);
+      if (gm){
+        curGroup = gm[1].trim();
+        continue;
+      }
+
+      var tm = raw.match(/^- \[( |x)\] (.+)$/);
+      if (tm && curGroup){
+        cur.taskEntries.push({ group: curGroup, name: tm[2].trim(), checked: tm[1] === 'x' });
+        continue;
+      }
+    }
+    finalizeDay();
+    return { days: days, settings: settings };
+  }
+
+  // Exporteer de kernfuncties voor testdoeleinden (Node) zonder de UI te breken in de browser.
+  if (typeof module !== 'undefined' && module.exports){
+    module.exports = { generateMarkdown: generateMarkdown, parseMarkdown: parseMarkdown, toKey: toKey, fromKey: fromKey, defaultSettings: defaultSettings };
+  }
+
+  /* ========================================================================
+     APPLICATIE (UI) - wordt enkel uitgevoerd in de browser
+     ==================================================================== */
+  if (typeof window === 'undefined' || typeof document === 'undefined') return;
+
+  var state = loadState();
+  var currentKey = toKey(new Date());
+  var saveTimer = null;
+
+  /* ---------- DOM referenties ---------- */
+  var el = {
+    versionLine: document.getElementById('versionLine'),
+    dateLabel: document.getElementById('dateLabel'),
+    datePicker: document.getElementById('datePicker'),
+    statusDot: document.getElementById('statusDot'),
+    prevDay: document.getElementById('prevDay'),
+    nextDay: document.getElementById('nextDay'),
+    startTime: document.getElementById('startTime'),
+    endTime: document.getElementById('endTime'),
+    notes: document.getElementById('notes'),
+    groupsContainer: document.getElementById('groupsContainer'),
+    saveBtn: document.getElementById('saveBtn'),
+    saveToast: document.getElementById('saveToast'),
+    horseEgg: document.getElementById('horseEgg'),
+    settingsBtn: document.getElementById('settingsBtn'),
+    settingsOverlay: document.getElementById('settingsOverlay'),
+    closeSettings: document.getElementById('closeSettings'),
+    closeSettingsX: document.getElementById('closeSettingsX'),
+    weekdaysContainer: document.getElementById('weekdaysContainer'),
+    groupsEditContainer: document.getElementById('groupsEditContainer'),
+    addGroupBtn: document.getElementById('addGroupBtn'),
+    exportBtn: document.getElementById('exportBtn'),
+    importBtn: document.getElementById('importBtn'),
+    importFile: document.getElementById('importFile'),
+    helpBtn: document.getElementById('helpBtn'),
+    helpOverlay: document.getElementById('helpOverlay'),
+    closeHelp: document.getElementById('closeHelp'),
+    closeHelpX: document.getElementById('closeHelpX'),
+    promptText: document.getElementById('promptText'),
+    copyPromptBtn: document.getElementById('copyPromptBtn'),
+    dayCountLine: document.getElementById('dayCountLine'),
+    confirmOverlay: document.getElementById('confirmOverlay'),
+    confirmTitle: document.getElementById('confirmTitle'),
+    confirmBody: document.getElementById('confirmBody'),
+    confirmCancel: document.getElementById('confirmCancel'),
+    confirmOk: document.getElementById('confirmOk'),
+    mdOverlay: document.getElementById('mdOverlay'),
+    mdPreview: document.getElementById('mdPreview'),
+    mdClose: document.getElementById('mdClose'),
+    mdCopy: document.getElementById('mdCopy')
+  };
+
+  /* ---------- Dagdata ophalen (met niet-opgeslagen standaardvoorstel) ---------- */
+
+  // Geeft de "levende" weergave van een dag terug: bestaande data, of anders
+  // een niet-opgeslagen voorstel gebaseerd op de standaarduren van die weekdag.
+  function getVisibleDay(key){
+    if (state.days[key]) return state.days[key];
+    var d = fromKey(key);
+    var wd = d.getDay();
+    var wdSetting = state.settings.weekdays[wd];
+    var start = '', end = '';
+    if (wdSetting && wdSetting.enabled){
+      start = wdSetting.start || '';
+      end = wdSetting.end || '';
+    }
+    return { start: start, end: end, notes: '', tasks: {} };
+  }
+
+  // Zorgt dat state.days[key] echt bestaat (kloon van het huidige voorstel),
+  // zodat een bewerking meteen bewaard kan worden. Geeft het object terug.
+  function ensureDayExists(key){
+    if (!state.days[key]){
+      var visible = getVisibleDay(key);
+      state.days[key] = {
+        start: visible.start,
+        end: visible.end,
+        notes: visible.notes,
+        tasks: Object.assign({}, visible.tasks)
+      };
+    }
+    return state.days[key];
+  }
+
+  /* Een dag is pas "gekend" als er echt iets is ingevuld: minstens een
+     aangevinkte taak of tekst in het notitieveld. Uren alleen tellen niet,
+     want die worden automatisch voorgevuld. Maak je alles terug leeg, dan
+     staat het rode vraagteken er weer. */
+  function isDayEmpty(day){
+    if (!day) return true;
+    if (day.notes && day.notes.trim() !== '') return false;
+    if (day.tasks){
+      for (var id in day.tasks){
+        if (day.tasks[id]) return false;
+      }
+    }
+    return true;
+  }
+
+  function isDayKnown(key){
+    return !isDayEmpty(state.days[key]);
+  }
+
+  /* ---------- Weergave header ---------- */
+  function formatDateLabel(key){
+    var d = fromKey(key);
+    return WEEKDAY_SHORT[d.getDay()].replace(/^./, function(c){return c.toUpperCase();}) + ' ' +
+      d.getDate() + ' ' + MONTH_SHORT[d.getMonth()] + ' ' + d.getFullYear();
+  }
+
+  /* Paardje onderaan: vast per dag, maar de volgorde oogt willekeurig.
+     Dezelfde datum geeft altijd hetzelfde paardje, morgen een ander. */
+  var HORSES = ['\uD83D\uDC0E', '\uD83D\uDC34', '\uD83C\uDFC7', '\uD83C\uDFA0'];
+
+  function renderHorse(key){
+    if (!el.horseEgg) return;
+    var h = 0;
+    for (var i = 0; i < key.length; i++){
+      h = (h * 31 + key.charCodeAt(i) * 7919) % 100003;
+    }
+    el.horseEgg.textContent = HORSES[h % HORSES.length];
+  }
+
+  function renderHeader(){
+    el.dateLabel.childNodes[0].nodeValue = formatDateLabel(currentKey) + ' ';
+    el.datePicker.value = currentKey;
+    var known = isDayKnown(currentKey);
+    el.statusDot.className = 'status-dot ' + (known ? 'known' : 'unknown');
+    el.statusDot.textContent = known ? '✓' : '?';
+    renderHorse(currentKey);
+  }
+
+  /* ---------- Weergave uren + notitie ---------- */
+  function renderTimesAndNotes(){
+    var day = getVisibleDay(currentKey);
+    el.startTime.value = day.start || '';
+    el.endTime.value = day.end || '';
+    el.notes.value = day.notes || '';
+    autoGrow(el.notes);
+  }
+
+  function autoGrow(ta){
+    ta.style.height = 'auto';
+    ta.style.height = Math.max(ta.scrollHeight, 90) + 'px';
+  }
+
+  /* ---------- Weergave taken ---------- */
+  function renderGroups(){
+    var day = getVisibleDay(currentKey);
+    el.groupsContainer.innerHTML = '';
+    state.settings.groups.forEach(function(group){
+      var wrap = document.createElement('div');
+      wrap.className = 'group';
+      var title = document.createElement('div');
+      title.className = 'group-title';
+      title.textContent = group.name;
+      wrap.appendChild(title);
+
+      var list = document.createElement('div');
+      list.className = 'task-list';
+
+      group.tasks.forEach(function(task){
+        var row = document.createElement('div');
+        row.className = 'task-row';
+        row.setAttribute('role','checkbox');
+
+        var checked = !!(day.tasks && day.tasks[task.id]);
+        var box = document.createElement('div');
+        box.className = 'checkbox' + (checked ? ' checked' : '');
+
+        var name = document.createElement('div');
+        name.className = 'task-name';
+        name.textContent = task.name;
+
+        row.appendChild(box);
+        row.appendChild(name);
+        row.addEventListener('click', function(){
+          toggleTask(task.id);
+        });
+
+        list.appendChild(row);
+      });
+
+      wrap.appendChild(list);
+      el.groupsContainer.appendChild(wrap);
+    });
+  }
+
+  function toggleTask(taskId){
+    var d = ensureDayExists(currentKey);
+    d.tasks[taskId] = !d.tasks[taskId];
+    if (!d.tasks[taskId]) delete d.tasks[taskId];
+    saveState();
+    renderHeader();
+    renderGroups();
+  }
+
+  /* ---------- Volledige render ---------- */
+  function renderDay(){
+    renderHeader();
+    renderTimesAndNotes();
+    renderGroups();
+  }
+
+  /* ---------- Foutmelding bij opslaan ---------- */
+  var toastTimer = null;
+  function showSaveError(){
+    el.saveToast.classList.add('show');
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){
+      el.saveToast.classList.remove('show');
+    }, 4000);
+  }
+  function hideSaveError(){
+    if (toastTimer) clearTimeout(toastTimer);
+    el.saveToast.classList.remove('show');
+  }
+
+  /* ---------- Event handlers: tijden & notitie ---------- */
+  el.startTime.addEventListener('input', function(){
+    var d = ensureDayExists(currentKey);
+    d.start = el.startTime.value;
+    saveState();
+    renderHeader();
+  });
+  el.endTime.addEventListener('input', function(){
+    var d = ensureDayExists(currentKey);
+    d.end = el.endTime.value;
+    saveState();
+    renderHeader();
+  });
+  el.notes.addEventListener('input', function(){
+    autoGrow(el.notes);
+    if (saveTimer) clearTimeout(saveTimer);
+    saveTimer = setTimeout(function(){
+      var d = ensureDayExists(currentKey);
+      d.notes = el.notes.value;
+      saveState();
+      renderHeader();
+    }, 300);
+  });
+
+  /* ---------- Navigatie ---------- */
+  function goToKey(key){
+    currentKey = key;
+    renderDay();
+  }
+  el.prevDay.addEventListener('click', function(){
+    var d = fromKey(currentKey);
+    d.setDate(d.getDate() - 1);
+    goToKey(toKey(d));
+  });
+  el.nextDay.addEventListener('click', function(){
+    var d = fromKey(currentKey);
+    d.setDate(d.getDate() + 1);
+    goToKey(toKey(d));
+  });
+  /* Het datumveld ligt onzichtbaar bovenop het datumlabel, zodat een tik op de
+     datum een echte tik op het veld is. Dat is de enige manier waarop iOS de
+     datumkiezer opent. Op desktop opent showPicker() hem alsnog. */
+  el.datePicker.addEventListener('click', function(){
+    try {
+      if (typeof el.datePicker.showPicker === 'function') el.datePicker.showPicker();
+    } catch(e){ /* al open, of niet ondersteund: de browser regelt het zelf */ }
+  });
+  el.datePicker.addEventListener('change', function(){
+    if (el.datePicker.value){
+      goToKey(el.datePicker.value);
+    }
+  });
+
+  /* ---------- Knop 'Backup bewaren': markeert dag als gekend en start de export ---------- */
+  el.saveBtn.addEventListener('click', function(){
+    ensureDayExists(currentKey); // expliciet opslaan = dag telt als gekend
+    saveState();
+    renderHeader();
+    startExportFlow();
+  });
+
+  /* Zet een venster terug bovenaan. Twee keer, want tijdens de openanimatie
+     kan iOS de scrollpositie nog eens herstellen. */
+  function scrollToTop(overlay){
+    var body = overlay.querySelector('.sheet-body');
+    if (!body) return;
+    body.scrollTop = 0;
+    requestAnimationFrame(function(){ body.scrollTop = 0; });
+    setTimeout(function(){ body.scrollTop = 0; }, 260);
+  }
+
+  /* ========================================================================
+     INSTELLINGEN (schermvullend venster)
+     ==================================================================== */
+  function openSettings(){
+    renderWeekdaysSettings();
+    renderGroupsSettings();
+    renderDayCount();
+    el.settingsOverlay.classList.add('open');
+    // Het venster blijft in de pagina staan, dus onthoudt het waar het stond.
+    // Bij elke opening beginnen we opnieuw bovenaan.
+    scrollToTop(el.settingsOverlay);
+  }
+  function closeSettingsSheet(){
+    el.settingsOverlay.classList.remove('open');
+  }
+  el.settingsBtn.addEventListener('click', openSettings);
+  el.closeSettings.addEventListener('click', closeSettingsSheet);
+  el.closeSettingsX.addEventListener('click', closeSettingsSheet);
+  el.settingsOverlay.addEventListener('click', function(e){
+    if (e.target === el.settingsOverlay) closeSettingsSheet();
+  });
+
+  function renderDayCount(){
+    var n = Object.keys(state.days).filter(function(k){
+      return !isDayEmpty(state.days[k]);
+    }).length;
+    el.dayCountLine.textContent = n + (n === 1 ? ' dag gelogd' : ' dagen gelogd');
+    if (el.versionLine) el.versionLine.textContent = 'Hippolog ' + APP_VERSION;
+  }
+
+  var WD_ORDER = [1,2,3,4,5,6,0]; // ma..zo weergave-volgorde
+
+  function renderWeekdaysSettings(){
+    el.weekdaysContainer.innerHTML = '';
+    WD_ORDER.forEach(function(wdIdx){
+      var cfg = state.settings.weekdays[wdIdx];
+      var row = document.createElement('div');
+      row.className = 'weekday-row';
+
+      var nameEl = document.createElement('div');
+      nameEl.className = 'wd-name';
+      nameEl.textContent = WEEKDAY_SHORT[wdIdx].replace(/^./, function(c){return c.toUpperCase();});
+
+      var toggle = document.createElement('button');
+      toggle.className = 'toggle' + (cfg.enabled ? ' on' : '');
+      toggle.type = 'button';
+      toggle.addEventListener('click', function(){
+        cfg.enabled = !cfg.enabled;
+        if (cfg.enabled){
+          // Aanzetten geeft altijd de standaarduren, ook al stond er ooit iets anders.
+          cfg.start = DEFAULT_START;
+          cfg.end = DEFAULT_END;
+        } else {
+          // Uitzetten maakt de velden leeg
+          cfg.start = '';
+          cfg.end = '';
+        }
+        saveState();
+        renderWeekdaysSettings();
+        renderDay(); // de header van de huidige dag kan mee veranderen
+      });
+
+      var startInput = document.createElement('input');
+      startInput.type = 'time';
+      startInput.disabled = !cfg.enabled;
+      startInput.value = cfg.enabled ? (cfg.start || '') : '';
+      startInput.addEventListener('input', function(){
+        cfg.start = startInput.value;
+        saveState();
+      });
+
+      var endInput = document.createElement('input');
+      endInput.type = 'time';
+      endInput.disabled = !cfg.enabled;
+      endInput.value = cfg.enabled ? (cfg.end || '') : '';
+      endInput.addEventListener('input', function(){
+        cfg.end = endInput.value;
+        saveState();
+      });
+
+      row.appendChild(nameEl);
+      row.appendChild(toggle);
+      row.appendChild(startInput);
+      row.appendChild(endInput);
+      el.weekdaysContainer.appendChild(row);
+    });
+  }
+
+  /* ========================================================================
+     TIKKEN OP iOS
+     Safari gebruikt de eerste tik na het scrollen om de uitloop van dat
+     scrollen te stoppen, waardoor die tik verloren gaat. We laten knoppen en
+     taakrijen daarom al op touchend reageren, en onderdrukken de tik die
+     Safari daarna zelf nog zou nabootsen.
+     ==================================================================== */
+  (function(){
+    var start = null;
+    document.addEventListener('touchstart', function(ev){
+      var t = ev.touches && ev.touches[0];
+      start = t ? { x: t.clientX, y: t.clientY } : null;
+    }, { passive: true });
+
+    document.addEventListener('touchend', function(ev){
+      if (!start) return;
+      var t = ev.changedTouches && ev.changedTouches[0];
+      if (!t) return;
+      // Een veeg of sleepbeweging is geen tik.
+      if (Math.abs(t.clientX - start.x) > 10 || Math.abs(t.clientY - start.y) > 10) return;
+      start = null;
+      if (!ev.target || !ev.target.closest) return;
+      if (ev.target.closest('.drag-handle')) return;
+      var target = ev.target.closest('button, .task-row');
+      if (!target || target.disabled) return;
+      // Knoppen die het deelvenster of een download starten, laten we met rust:
+      // iOS staat dat alleen toe na een echte tik, niet na een nagebootste.
+      if (target.hasAttribute && target.hasAttribute('data-native-tap')) return;
+      if (ev.cancelable) ev.preventDefault();
+      target.click();
+    }, { passive: false });
+  })();
+
+  /* ========================================================================
+     VERSLEPEN OM DE VOLGORDE TE WIJZIGEN
+     Werkt met pointer-events, dus zowel met muis als met vinger.
+     ==================================================================== */
+  function sortByIds(list, order){
+    var byId = {};
+    list.forEach(function(item){ byId[item.id] = item; });
+    var out = [];
+    order.forEach(function(id){ if (byId[id]){ out.push(byId[id]); delete byId[id]; } });
+    // wat niet in de volgorde stond, blijft achteraan staan
+    list.forEach(function(item){ if (byId[item.id]) out.push(item); });
+    return out;
+  }
+
+  function enableDragSort(container, itemSelector, onDrop){
+    // Blijvende containers mogen maar één keer luisteraars krijgen
+    if (container.__dragSortReady) return;
+    container.__dragSortReady = true;
+    var dragging = null;
+
+    container.addEventListener('pointerdown', function(ev){
+      if (!ev.target.closest) return;
+      // Taaklijsten zitten in de groepenlijst. De binnenste lijst hoort de tik
+      // eerst en claimt hem, zodat een taak niet ook de groep meesleept.
+      if (ev.__dragClaimed) return;
+      var handle = ev.target.closest('.drag-handle');
+      if (!handle || !container.contains(handle)) return;
+      var item = handle.closest(itemSelector);
+      if (!item || item.parentNode !== container) return;
+      ev.__dragClaimed = true;
+      ev.preventDefault();
+      dragging = item;
+      item.classList.add('dragging');
+      try { container.setPointerCapture(ev.pointerId); } catch(e){}
+    });
+
+    container.addEventListener('pointermove', function(ev){
+      if (!dragging) return;
+      ev.preventDefault();
+      var y = ev.clientY;
+      autoScroll(y);
+
+      // Zoek het eerste item waar we bovenop komen en zet de gesleepte rij
+      // ervoor. De drempel blijft klein bij hoge blokken, zodat je een lange
+      // groep niet helemaal hoeft te overbruggen.
+      var items = Array.prototype.slice.call(container.querySelectorAll(itemSelector))
+        .filter(function(n){ return n !== dragging; });
+      var target = null;
+      for (var i = 0; i < items.length; i++){
+        var r = items[i].getBoundingClientRect();
+        if (y < r.top + Math.min(r.height / 2, 40)){ target = items[i]; break; }
+      }
+      if (target !== dragging.nextSibling || target === null){
+        container.insertBefore(dragging, target);
+      }
+    });
+
+    // Meescrollen wanneer je aan de rand van het instellingenvenster komt
+    function autoScroll(y){
+      var box = container.closest('.sheet-body') || container.closest('.sheet');
+      if (!box) return;
+      var r = box.getBoundingClientRect();
+      if (y < r.top + 60) box.scrollTop -= 12;
+      else if (y > r.bottom - 60) box.scrollTop += 12;
+    }
+
+    function finish(ev){
+      if (!dragging) return;
+      dragging.classList.remove('dragging');
+      dragging = null;
+      try { container.releasePointerCapture(ev.pointerId); } catch(e){}
+      var order = Array.prototype.slice.call(container.querySelectorAll(itemSelector))
+        .map(function(node){ return node.dataset.id; });
+      onDrop(order);
+    }
+    container.addEventListener('pointerup', finish);
+    container.addEventListener('pointercancel', finish);
+  }
+
+  /* Sleepgreepje: zes puntjes, het gangbare teken voor "versleep mij" */
+  function makeHandle(label){
+    var h = document.createElement('span');
+    h.className = 'drag-handle';
+    h.setAttribute('aria-label', label);
+    h.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">' +
+      '<circle cx="6" cy="3.5" r="1.5"/><circle cx="10" cy="3.5" r="1.5"/>' +
+      '<circle cx="6" cy="8" r="1.5"/><circle cx="10" cy="8" r="1.5"/>' +
+      '<circle cx="6" cy="12.5" r="1.5"/><circle cx="10" cy="12.5" r="1.5"/></svg>';
+    return h;
+  }
+
+  function renderGroupsSettings(){
+    el.groupsEditContainer.innerHTML = '';
+
+    var hint = document.createElement('div');
+    hint.className = 'drag-hint';
+    hint.textContent = 'Sleep aan de puntjes om de volgorde te wijzigen.';
+    el.groupsEditContainer.appendChild(hint);
+
+    state.settings.groups.forEach(function(group){
+      var block = document.createElement('div');
+      block.className = 'group-block';
+      block.dataset.id = group.id;
+
+      var head = document.createElement('div');
+      head.className = 'group-block-head';
+      head.appendChild(makeHandle('Groep verslepen'));
+
+      var nameInput = document.createElement('input');
+      nameInput.type = 'text';
+      nameInput.value = group.name;
+      nameInput.addEventListener('change', function(){
+        group.name = nameInput.value.trim() || group.name;
+        saveState();
+        renderGroups();
+      });
+
+      var delGroupBtn = document.createElement('button');
+      delGroupBtn.className = 'small-btn danger';
+      delGroupBtn.type = 'button';
+      delGroupBtn.textContent = 'Verwijder groep';
+      delGroupBtn.addEventListener('click', function(){
+        askConfirm(
+          'Groep verwijderen?',
+          'De groep "' + group.name + '" en haar ' + group.tasks.length +
+            ' taken verdwijnen uit de lijst. Wat je vroeger aanvinkte blijft in je backups staan.',
+          'Ja, verwijderen',
+          function(){
+            // taken archiveren zodat oude logs hun naam behouden
+            group.tasks.forEach(function(t){
+              state.settings.archivedTasks[t.id] = t.name;
+            });
+            var i = state.settings.groups.indexOf(group);
+            if (i > -1) state.settings.groups.splice(i, 1);
+            saveState();
+            renderGroupsSettings();
+            renderGroups();
+          }
+        );
+      });
+
+      head.appendChild(nameInput);
+      head.appendChild(delGroupBtn);
+      block.appendChild(head);
+
+      // eigen omhulsel voor de taken, zodat slepen enkel taken onderling verwisselt
+      var taskWrap = document.createElement('div');
+      taskWrap.className = 'task-edit-list';
+
+      group.tasks.forEach(function(task){
+        var tRow = document.createElement('div');
+        tRow.className = 'task-edit-row';
+        tRow.dataset.id = task.id;
+        tRow.appendChild(makeHandle('Taak verslepen'));
+
+        var tInput = document.createElement('input');
+        tInput.type = 'text';
+        tInput.value = task.name;
+        tInput.addEventListener('change', function(){
+          task.name = tInput.value.trim() || task.name;
+          saveState();
+          renderGroups();
+        });
+
+        var tDel = document.createElement('button');
+        tDel.className = 'small-btn danger';
+        tDel.type = 'button';
+        tDel.textContent = 'Verwijder';
+        tDel.addEventListener('click', function(){
+          askConfirm(
+            'Taak verwijderen?',
+            '"' + task.name + '" verdwijnt uit de lijst. Wat je vroeger aanvinkte blijft in je backups staan.',
+            'Ja, verwijderen',
+            function(){
+              state.settings.archivedTasks[task.id] = task.name;
+              var i = group.tasks.indexOf(task);
+              if (i > -1) group.tasks.splice(i, 1);
+              saveState();
+              renderGroupsSettings();
+              renderGroups();
+            }
+          );
+        });
+
+        tRow.appendChild(tInput);
+        tRow.appendChild(tDel);
+        taskWrap.appendChild(tRow);
+      });
+
+      block.appendChild(taskWrap);
+
+      // taken binnen deze groep versleepbaar maken
+      enableDragSort(taskWrap, '.task-edit-row', function(order){
+        group.tasks = sortByIds(group.tasks, order);
+        saveState();
+        renderGroups();
+      });
+
+      var addTaskBtn = document.createElement('button');
+      addTaskBtn.className = 'add-btn';
+      addTaskBtn.type = 'button';
+      addTaskBtn.textContent = '+ Taak toevoegen';
+      addTaskBtn.addEventListener('click', function(){
+        group.tasks.push({ id: genId('t'), name: 'Nieuwe taak' });
+        saveState();
+        renderGroupsSettings();
+        renderGroups();
+      });
+      block.appendChild(addTaskBtn);
+
+      el.groupsEditContainer.appendChild(block);
+    });
+
+    // groepen onderling versleepbaar maken
+    enableDragSort(el.groupsEditContainer, '.group-block', function(order){
+      state.settings.groups = sortByIds(state.settings.groups, order);
+      saveState();
+      renderGroups();
+    });
+  }
+
+
+  el.addGroupBtn.addEventListener('click', function(){
+    state.settings.groups.push({ id: genId('g'), name: 'Nieuwe groep', tasks: [] });
+    saveState();
+    renderGroupsSettings();
+    renderGroups();
+  });
+
+  /* ========================================================================
+     EXPORT / IMPORT / DELEN
+     ==================================================================== */
+
+  function exportFilename(){
+    var d = new Date();
+    return 'hippolog-' + d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate()) + '.md';
+  }
+
+  function startExportFlow(){
+    var md = generateMarkdown(state);
+    var filename = exportFilename();
+
+    // 1) Probeer navigator.share met een File (ideaal op iOS)
+    try {
+      if (navigator.canShare && navigator.share){
+        var file = new File([md], filename, { type: 'text/markdown' });
+        if (navigator.canShare({ files: [file] })){
+          navigator.share({ files: [file], title: 'Hippolog' }).catch(function(){
+            fallbackDownload(md, filename);
+          });
+          return;
+        }
+      }
+    } catch(e){ /* ga door naar fallback */ }
+
+    fallbackDownload(md, filename);
+  }
+
+  function fallbackDownload(md, filename){
+    try {
+      var blob = new Blob([md], { type: 'text/markdown' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+    } catch(e){
+      showMarkdownModal(md);
+    }
+  }
+
+  function showMarkdownModal(md){
+    el.mdPreview.value = md;
+    el.mdOverlay.classList.add('open');
+  }
+  el.mdClose.addEventListener('click', function(){
+    el.mdOverlay.classList.remove('open');
+  });
+  el.mdCopy.addEventListener('click', function(){
+    el.mdPreview.select();
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(el.mdPreview.value);
+      } else {
+        document.execCommand('copy');
+      }
+    } catch(e){ /* stil falen */ }
+  });
+
+  el.exportBtn.addEventListener('click', function(){
+    startExportFlow();
+  });
+
+  /* ---------- Herbruikbare ja/nee-vraag ----------
+     Eén venster voor elke bevestiging: import, en het verwijderen van een
+     taak of een groep. Annuleren staat links en is de veilige keuze. */
+  var pendingConfirm = null;
+
+  function askConfirm(title, body, okLabel, onYes){
+    el.confirmTitle.textContent = title;
+    el.confirmBody.textContent = body;
+    el.confirmOk.textContent = okLabel;
+    pendingConfirm = onYes;
+    el.confirmOverlay.classList.add('open');
+  }
+
+  function closeConfirm(){
+    pendingConfirm = null;
+    el.confirmOverlay.classList.remove('open');
+  }
+
+  el.confirmCancel.addEventListener('click', closeConfirm);
+  el.confirmOverlay.addEventListener('click', function(ev){
+    if (ev.target === el.confirmOverlay) closeConfirm();
+  });
+  el.confirmOk.addEventListener('click', function(){
+    var fn = pendingConfirm;
+    closeConfirm();
+    if (fn) fn();
+  });
+
+  /* ---------- Uitlegvenster ---------- */
+  function openHelp(){
+    el.helpOverlay.classList.add('open');
+    scrollToTop(el.helpOverlay);
+  }
+  function closeHelp(){ el.helpOverlay.classList.remove('open'); }
+  el.helpBtn.addEventListener('click', openHelp);
+  el.closeHelp.addEventListener('click', closeHelp);
+  el.closeHelpX.addEventListener('click', closeHelp);
+
+  el.copyPromptBtn.addEventListener('click', function(){
+    var text = el.promptText.textContent;
+    function done(ok){
+      el.copyPromptBtn.textContent = ok ? 'Gekopieerd' : 'Kopiëren lukt niet, selecteer de tekst zelf';
+      setTimeout(function(){ el.copyPromptBtn.textContent = 'Kopieer de prompt'; }, 2500);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){ done(true); }, function(){ done(false); });
+      return;
+    }
+    // Oudere browsers: via een tijdelijk tekstveld
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      done(ok);
+    } catch(e){ done(false); }
+  });
+
+  /* ---------- Importeren van een .md-backup ---------- */
+  el.importBtn.addEventListener('click', function(){
+    el.importFile.value = '';
+    el.importFile.click();
+  });
+
+  el.importFile.addEventListener('change', function(){
+    var file = el.importFile.files && el.importFile.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function(){
+      var text = reader.result;
+      askConfirm(
+        'Gegevens vervangen?',
+        'Dit vervangt alles wat nu op dit toestel staat door de inhoud van het gekozen bestand.',
+        'Ja, vervangen',
+        function(){
+          try {
+            var result = parseMarkdown(text, state.settings);
+            state.days = result.days;
+            state.settings = result.settings;
+            saveState();
+            renderDay();
+            renderWeekdaysSettings();
+            renderGroupsSettings();
+            renderDayCount();
+          } catch(e){ /* bij een leesfout blijven de gegevens ongewijzigd */ }
+        }
+      );
+    };
+    reader.readAsText(file);
+  });
+
+  /* ---------- Webapp-manifest ----------
+     Android/Chrome wil een manifest om de tool op het beginscherm te kunnen
+     zetten. We maken het bij het laden aan als blob, zodat er geen tweede
+     bestand nodig is op de server. */
+  function installManifest(){
+    try {
+      var manifest = {
+        name: 'Hippolog',
+        short_name: 'Hippolog',
+        description: 'Log je werkdagen op stal.',
+        start_url: '.',
+        scope: '.',
+        display: 'standalone',
+        orientation: 'portrait',
+        background_color: '#f4f4f2',
+        theme_color: '#16a34a',
+        icons: [
+          { src: ICON_192, sizes: '192x192', type: 'image/png', purpose: 'any' },
+          { src: ICON_512, sizes: '512x512', type: 'image/png', purpose: 'any' },
+          { src: ICON_512, sizes: '512x512', type: 'image/png', purpose: 'maskable' }
+        ]
+      };
+      var blob = new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' });
+      var link = document.createElement('link');
+      link.rel = 'manifest';
+      link.href = URL.createObjectURL(blob);
+      document.head.appendChild(link);
+    } catch(e){ /* niet kritiek: zonder manifest werkt de tool gewoon in de browser */ }
+  }
+  installManifest();
+
+  /* ---------- Init ---------- */
+  renderDay();
+
+})();
+</script>
+</body>
+</html>
