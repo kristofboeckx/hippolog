@@ -349,12 +349,6 @@
   .help-body h3{ margin:22px 0 6px; }
   .help-body ol{ font-size:15px; line-height:1.55; padding-left:20px; margin:0 0 12px; }
   .help-body li{ margin-bottom:6px; }
-  .prompt-box{
-    background:var(--input-bg); border:1px solid var(--border); border-radius:12px;
-    padding:12px 14px; font-size:13px; line-height:1.5; white-space:pre-wrap;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    max-height:none; overflow-x:auto;
-  }
   .note-box{
     background:var(--input-bg); border-left:3px solid var(--accent-green);
     border-radius:0 10px 10px 0; padding:10px 14px; font-size:14px; line-height:1.5;
@@ -398,7 +392,11 @@
   }
   .modal-box h3{ margin-top:0; font-size:17px; }
   .modal-box p{ font-size:14px; color:var(--text-dim); line-height:1.5; }
-  .modal-actions{ display:flex; gap:10px; justify-content:flex-end; margin-top:18px; }
+  .modal-actions{ display:flex; gap:10px; justify-content:flex-end; margin-top:18px; flex-wrap:wrap; }
+  /* Snelkoppelingen naar de AI-tools, zien eruit als de andere knoppen */
+  a.modal-btn{ text-decoration:none; font-family:inherit; display:inline-block; }
+  a.modal-btn[hidden]{ display:none; }   /* anders wint display:inline-block */
+  .ai-link{ font-weight:600; }
   .modal-btn{ padding:10px 18px; border-radius:10px; border:none; font-size:14px; cursor:pointer; }
   .modal-btn.primary{ background:var(--accent-green); color:#fff; }
   .modal-btn.secondary{ background:var(--input-bg); color:var(--text); border:1px solid var(--border); }
@@ -450,7 +448,7 @@
         <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
       </svg>
     </button>
-    <button id="saveBtn" data-native-tap>Backup bewaren</button>
+    <button id="saveBtn" data-native-tap>Verslag voorbereiden</button>
   </footer>
 
   <!-- Ademruimte onder de knoppen, buiten het bereik van de Safari-balk.
@@ -482,7 +480,7 @@
         <button class="wide-btn" id="importBtn" data-native-tap>Importeer .md</button>
         <input type="file" id="importFile" accept=".md,text/markdown" style="display:none">
       </div>
-      <button class="text-link" id="helpBtn">Wat doe je met dit .md bestand?</button>
+      <button class="text-link" id="helpBtn">Hoe maak je je weekverslag?</button>
       <div class="stat-line" id="dayCountLine">0 dagen gelogd</div>
 
       <!-- Afsluiter: streepje, spreuk, ondertekening en het versienummer -->
@@ -518,47 +516,29 @@
 
   <!-- ===== Uitleg: wat doe je met het .md bestand ===== -->
   <div class="sheet-overlay" id="helpOverlay">
-    <div class="sheet" role="dialog" aria-modal="true" aria-label="Wat doe je met dit bestand">
+    <div class="sheet" role="dialog" aria-modal="true" aria-label="Hoe maak je je weekverslag">
       <div class="sheet-top">
-        <h2>Wat doe je hiermee?</h2>
+        <h2>Je weekverslag</h2>
         <button class="sheet-x" id="closeHelpX" aria-label="Sluiten">&times;</button>
       </div>
       <div class="sheet-body help-body">
 
-        <h3>1. Het is je backup</h3>
-        <p>Alles wat je invult, staat op dit toestel zelf. Raak je je telefoon kwijt of wis je de gegevens van je browser, dan is je logboek weg. Daarom druk je af en toe op <strong>Backup bewaren</strong> en zet je dat .md bestand ergens veilig, bijvoorbeeld in Bestanden of in je iCloud.</p>
-        <div class="note-box">Eén bestand bevat al je dagen, van de recentste naar de oudste. Je hebt er dus maar één nodig, en het mag gerust een heel schooljaar lang aangroeien.</div>
+        <h3>1. Elke week een verslag</h3>
+        <p>Je leerkracht wil weten wat je op je werkplek gedaan hebt. In plaats van dat zelf uit te typen, laat je een AI het schrijven op basis van wat je hier invulde. Jij leest het na, past aan waar het niet klopt, en stuurt het door.</p>
 
-        <h3>2. Er komt een weekverslag uit</h3>
-        <p>Je leerkracht wil weten wat je op je werkplek gedaan hebt. In plaats van dat zelf elke week uit te typen, laat je een AI het verslag schrijven op basis van je logboek. Jij leest het na, past aan waar het niet klopt, en stuurt het door.</p>
-
-        <h3>3. Zo doe je dat</h3>
+        <h3>2. Zo doe je dat</h3>
         <ol>
-          <li>Druk op <strong>Backup bewaren</strong> en bewaar het bestand.</li>
-          <li>Open ChatGPT, Gemini of Claude.</li>
-          <li>Voeg het .md bestand toe aan je bericht.</li>
-          <li>Plak de prompt hieronder erbij en verstuur.</li>
-          <li>Lees het verslag na. Klopt er iets niet, verbeter het zelf.</li>
+          <li>Ga naar een dag uit de week die je wil doorsturen.</li>
+          <li>Druk onderaan op <strong>Verslag voorbereiden</strong>. Die hele week staat dan op je klembord, samen met de opdracht voor de AI.</li>
+          <li>Kies in de melding <strong>ChatGPT</strong> of <strong>Gemini</strong>, of open zelf een andere AI.</li>
+          <li>Plak de tekst in een nieuw gesprek en verstuur.</li>
+          <li>Lees het verslag na. Klopt er iets niet, verbeter het zelf voor je het doorstuurt.</li>
         </ol>
+        <div class="note-box">De knop neemt de week van maandag tot en met zondag rond de dag die je open hebt staan. Je hoeft zelf niets te kopiëren of te typen.</div>
 
-        <h3>De prompt</h3>
-        <p>Kopieer deze tekst en plak ze bij je bestand.</p>
-        <div class="prompt-box" id="promptText">Dit bestand is mijn werklogboek van mijn werkplek. Per dag staat erin: de datum, mijn start- en einduur, een notitie in mijn eigen woorden, en de taken die ik heb afgevinkt. Het bestand kan een heel schooljaar bevatten, met de recentste dag bovenaan.
-
-Schrijf een kort verslag van de laatste volledige week (maandag tot en met zondag) die al voorbij is. Gebruik alleen de dagen uit die week en negeer al de rest.
-
-Zo wil ik het verslag:
-- platte tekst, geen opmaak, geen koppen, geen sterretjes of streepjes
-- gewone regeleindes en een lege regel tussen de stukken, zodat het leesbaar blijft
-- begin met de periode, bijvoorbeeld: Verslag van maandag 1 tot en met zondag 7 september
-- daarna per gewerkte dag een korte alinea: de dag en datum, mijn uren, en in vloeiende zinnen wat ik die dag deed
-- sluit af met twee of drie zinnen over de week: hoeveel uur ik in totaal werkte en welke taken het vaakst terugkwamen
-- schrijf in de ik-vorm, in het Nederlands, zakelijk maar vlot
-- ongeveer 150 tot 250 woorden
-- verzin niets bij, gebruik alleen wat in het bestand staat
-
-Staan er voor die week geen dagen in het bestand, zeg dat dan gewoon.</div>
-        <button class="wide-btn" id="copyPromptBtn" data-native-tap style="width:100%;margin-top:10px">Kopieer de prompt</button>
+        <h3>3. Maak af en toe een backup</h3>
+        <p>Alles wat je invult, staat op dit toestel zelf. Raak je je telefoon kwijt of wis je de gegevens van je browser, dan is je logboek weg. Druk daarom af en toe op <strong>Exporteer .md</strong> hierboven en zet dat bestand ergens veilig, bijvoorbeeld in Bestanden of in je iCloud.</p>
+        <p>Eén bestand bevat al je dagen en mag gerust een heel schooljaar lang aangroeien. Met <strong>Importeer .md</strong> zet je het terug, bijvoorbeeld op een nieuwe telefoon.</p>
 
         <h3>Nog dit</h3>
         <p>De AI ziet alleen wat jij invulde. Vul je niets in, dan valt er ook niets te schrijven. Een korte notitie per dag maakt het verslag meteen een pak beter dan enkel aangevinkte vakjes.</p>
@@ -585,12 +565,27 @@ Staan er voor die week geen dagen in het bestand, zeg dat dan gewoon.</div>
   <!-- ===== Fallback modal voor export tonen ===== -->
   <div class="modal-overlay" id="mdOverlay">
     <div class="modal-box">
-      <h3>Hippolog export</h3>
-      <p>Delen/downloaden lukte niet automatisch. Kopieer de tekst hieronder.</p>
+      <h3 id="mdTitle">Hippolog export</h3>
+      <p id="mdDesc">Delen/downloaden lukte niet automatisch. Kopieer de tekst hieronder.</p>
       <textarea id="mdPreview" readonly></textarea>
       <div class="modal-actions">
         <button class="modal-btn secondary" id="mdClose">Sluiten</button>
         <button class="modal-btn primary" id="mdCopy">Kopieer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Melding na het kopiëren van de week ===== -->
+  <div class="modal-overlay" id="infoOverlay">
+    <div class="modal-box">
+      <h3 id="infoTitle">Je week staat op het klembord</h3>
+      <p id="infoBody"></p>
+      <div class="modal-actions" id="infoActions">
+        <a class="modal-btn secondary ai-link" id="linkChatgpt"
+           href="https://chatgpt.com/" target="_blank" rel="noopener">ChatGPT</a>
+        <a class="modal-btn secondary ai-link" id="linkGemini"
+           href="https://gemini.google.com/app" target="_blank" rel="noopener">Gemini</a>
+        <button class="modal-btn primary" id="infoOk">Oké</button>
       </div>
     </div>
   </div>
@@ -610,7 +605,7 @@ Staan er voor die week geen dagen in het bestand, zeg dat dan gewoon.</div>
   /* Versienummer van deze build. Wordt bij elke nieuwe versie bijgewerkt
      naar het tijdstip van de build (Europe/Brussels), formaat vJJJJ.MM.DD UU:MM.
      Verschijnt onderaan het instellingenmenu. */
-  var APP_VERSION = 'v2026.09.07 22:16';
+  var APP_VERSION = 'v2026.09.08 03:05';
 
   /* Beginscherm-iconen. Het manifest wordt bij het laden als blob aangemaakt,
      zodat alles in dit ene bestand kan blijven zitten. */
@@ -918,8 +913,6 @@ Staan er voor die week geen dagen in het bestand, zeg dat dan gewoon.</div>
     helpOverlay: document.getElementById('helpOverlay'),
     closeHelp: document.getElementById('closeHelp'),
     closeHelpX: document.getElementById('closeHelpX'),
-    promptText: document.getElementById('promptText'),
-    copyPromptBtn: document.getElementById('copyPromptBtn'),
     dayCountLine: document.getElementById('dayCountLine'),
     confirmOverlay: document.getElementById('confirmOverlay'),
     confirmTitle: document.getElementById('confirmTitle'),
@@ -927,6 +920,14 @@ Staan er voor die week geen dagen in het bestand, zeg dat dan gewoon.</div>
     confirmCancel: document.getElementById('confirmCancel'),
     confirmOk: document.getElementById('confirmOk'),
     mdOverlay: document.getElementById('mdOverlay'),
+    mdTitle: document.getElementById('mdTitle'),
+    mdDesc: document.getElementById('mdDesc'),
+    infoOverlay: document.getElementById('infoOverlay'),
+    infoTitle: document.getElementById('infoTitle'),
+    infoBody: document.getElementById('infoBody'),
+    infoOk: document.getElementById('infoOk'),
+    linkChatgpt: document.getElementById('linkChatgpt'),
+    linkGemini: document.getElementById('linkGemini'),
     mdPreview: document.getElementById('mdPreview'),
     mdClose: document.getElementById('mdClose'),
     mdCopy: document.getElementById('mdCopy')
@@ -1153,10 +1154,7 @@ Staan er voor die week geen dagen in het bestand, zeg dat dan gewoon.</div>
 
   /* ---------- Knop 'Backup bewaren': markeert dag als gekend en start de export ---------- */
   el.saveBtn.addEventListener('click', function(){
-    ensureDayExists(currentKey); // expliciet opslaan = dag telt als gekend
-    saveState();
-    renderHeader();
-    startExportFlow();
+    startWeekFlow();
   });
 
   /* Zet een venster terug bovenaan. Twee keer, want tijdens de openanimatie
@@ -1528,7 +1526,158 @@ Staan er voor die week geen dagen in het bestand, zeg dat dan gewoon.</div>
     return 'hippolog-' + d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate()) + '.md';
   }
 
+  /* ========================================================================
+     VERSLAG VOORBEREIDEN
+     Zet de week waar de gebruiker nu naar kijkt (maandag tot en met zondag)
+     samen met de instructie op het klembord. Zo hoeft er geen bestand heen
+     en weer: openen, plakken, klaar.
+     ==================================================================== */
+  var MONTH_FULL = ['januari','februari','maart','april','mei','juni',
+                    'juli','augustus','september','oktober','november','december'];
+
+  // Maandag van de week waarin deze datum valt
+  function weekStart(key){
+    var d = fromKey(key);
+    var shift = (d.getDay() + 6) % 7;   // zondag telt als laatste dag
+    d.setDate(d.getDate() - shift);
+    return d;
+  }
+
+  function weekKeys(key){
+    var start = weekStart(key), keys = [];
+    for (var i = 0; i < 7; i++){
+      var d = new Date(start.getFullYear(), start.getMonth(), start.getDate() + i);
+      keys.push(toKey(d));
+    }
+    return keys;
+  }
+
+  // "maandag 7 tot en met zondag 13 september 2026", met beide maanden
+  // als de week over een maandgrens loopt.
+  function weekLabel(key){
+    var keys = weekKeys(key);
+    var a = fromKey(keys[0]), b = fromKey(keys[6]);
+    var eind = 'zondag ' + b.getDate() + ' ' + MONTH_FULL[b.getMonth()] + ' ' + b.getFullYear();
+    var begin = 'maandag ' + a.getDate();
+    if (a.getMonth() !== b.getMonth() || a.getFullYear() !== b.getFullYear()){
+      begin += ' ' + MONTH_FULL[a.getMonth()];
+      if (a.getFullYear() !== b.getFullYear()) begin += ' ' + a.getFullYear();
+    }
+    return begin + ' tot en met ' + eind;
+  }
+
+  // De ingevulde dagen van die week, chronologisch, in hetzelfde formaat
+  // als de backup zodat de AI dezelfde structuur ziet.
+  function weekText(key){
+    var lines = [], gevonden = 0;
+    weekKeys(key).forEach(function(k){
+      var day = state.days[k];
+      if (isDayEmpty(day)) return;
+      gevonden++;
+      var d = fromKey(k);
+      lines.push('## ' + k + ' (' + WEEKDAY_FULL[d.getDay()] + ')');
+      lines.push('- Uren: ' + (day.start || '') + ' - ' + (day.end || ''));
+      if (day.notes && day.notes.trim() !== ''){
+        var n = day.notes.split('\n');
+        lines.push('- Notitie: ' + n[0]);
+        for (var i = 1; i < n.length; i++) lines.push('  ' + n[i]);
+      }
+      state.settings.groups.forEach(function(group){
+        var aangevinkt = group.tasks.filter(function(t){ return day.tasks && day.tasks[t.id]; });
+        if (!aangevinkt.length) return;
+        lines.push('');
+        lines.push('### ' + group.name);
+        aangevinkt.forEach(function(t){ lines.push('- ' + t.name); });
+      });
+      lines.push('');
+    });
+    return { tekst: lines.join('\n').trim(), dagen: gevonden };
+  }
+
+  function weekPrompt(key){
+    var w = weekText(key);
+    if (!w.dagen) return null;
+    var label = weekLabel(key);
+    return [
+      'Hieronder staat mijn werklogboek van een week op mijn werkplek. Per dag staat er de datum, mijn start- en einduur, een notitie in mijn eigen woorden, en de taken die ik die dag heb gedaan.',
+      '',
+      'Schrijf een kort verslag van de week van ' + label + '.',
+      '',
+      'Zo wil ik het verslag:',
+      '- platte tekst, geen opmaak, geen koppen, geen sterretjes of streepjes',
+      '- gewone regeleindes en een lege regel tussen de stukken, zodat het leesbaar blijft',
+      '- begin met de periode, bijvoorbeeld: Verslag van ' + label,
+      '- daarna per gewerkte dag een korte alinea: de dag en datum, mijn uren, en in vloeiende zinnen wat ik die dag deed',
+      '- sluit af met twee of drie zinnen over de week: hoeveel uur ik in totaal werkte en welke taken het vaakst terugkwamen',
+      '- schrijf in de ik-vorm, in het Nederlands, zakelijk maar vlot',
+      '- ongeveer 150 tot 250 woorden',
+      '- verzin niets bij, gebruik alleen wat hieronder staat',
+      '',
+      'Hier is mijn logboek van die week:',
+      '',
+      w.tekst
+    ].join('\n');
+  }
+
+  // metLinks: alleen tonen wanneer er echt iets op het klembord staat,
+  // anders stuur je haar naar een AI zonder tekst om te plakken.
+  function showInfo(title, body, metLinks){
+    el.infoTitle.textContent = title;
+    el.infoBody.textContent = body;
+    el.linkChatgpt.hidden = !metLinks;
+    el.linkGemini.hidden = !metLinks;
+    el.infoOverlay.classList.add('open');
+  }
+  function closeInfo(){ el.infoOverlay.classList.remove('open'); }
+  el.infoOk.addEventListener('click', closeInfo);
+  el.infoOverlay.addEventListener('click', function(ev){
+    if (ev.target === el.infoOverlay) closeInfo();
+  });
+
+  // Kopiëren geweigerd: toon de tekst zodat ze hem zelf kan selecteren.
+  function toonHandmatig(tekst){
+    el.mdTitle.textContent = 'Kopieer je week';
+    el.mdDesc.textContent = 'Kopiëren lukte niet vanzelf. Selecteer de tekst hieronder, kopieer ze, en plak ze in ChatGPT, Gemini of Claude.';
+    showMarkdownModal(tekst);
+  }
+
+  function startWeekFlow(){
+    var prompt = weekPrompt(currentKey);
+    if (!prompt){
+      showInfo('Deze week is nog leeg',
+        'Voor de week van ' + weekLabel(currentKey) + ' staat er nog niets ingevuld. ' +
+        'Vink eerst je taken aan of schrijf een notitie, dan kan je het verslag laten maken.');
+      return;
+    }
+
+    var gelukt = function(){
+      showInfo('Je week staat op het klembord',
+        'Kies hieronder een AI-tool of open er zelf een, plak de tekst in een nieuw gesprek en verstuur. ' +
+        'Je krijgt er een verslag van de week van ' + weekLabel(currentKey) + ' uit. Lees het na voor je het doorstuurt.',
+        true);
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(prompt).then(gelukt, function(){ toonHandmatig(prompt); });
+      return;
+    }
+    // Oudere browsers: via een tijdelijk tekstveld
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = prompt;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      if (ok) gelukt(); else toonHandmatig(prompt);
+    } catch(e){ toonHandmatig(prompt); }
+  }
+
   function startExportFlow(){
+    el.mdTitle.textContent = 'Hippolog export';
+    el.mdDesc.textContent = 'Delen of downloaden lukte niet automatisch. Kopieer de tekst hieronder.';
     var md = generateMarkdown(state);
     var filename = exportFilename();
 
@@ -1623,30 +1772,6 @@ Staan er voor die week geen dagen in het bestand, zeg dat dan gewoon.</div>
   el.helpBtn.addEventListener('click', openHelp);
   el.closeHelp.addEventListener('click', closeHelp);
   el.closeHelpX.addEventListener('click', closeHelp);
-
-  el.copyPromptBtn.addEventListener('click', function(){
-    var text = el.promptText.textContent;
-    function done(ok){
-      el.copyPromptBtn.textContent = ok ? 'Gekopieerd' : 'Kopiëren lukt niet, selecteer de tekst zelf';
-      setTimeout(function(){ el.copyPromptBtn.textContent = 'Kopieer de prompt'; }, 2500);
-    }
-    if (navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(text).then(function(){ done(true); }, function(){ done(false); });
-      return;
-    }
-    // Oudere browsers: via een tijdelijk tekstveld
-    try {
-      var ta = document.createElement('textarea');
-      ta.value = text;
-      ta.style.position = 'fixed';
-      ta.style.opacity = '0';
-      document.body.appendChild(ta);
-      ta.select();
-      var ok = document.execCommand('copy');
-      document.body.removeChild(ta);
-      done(ok);
-    } catch(e){ done(false); }
-  });
 
   /* ---------- Importeren van een .md-backup ---------- */
   el.importBtn.addEventListener('click', function(){
