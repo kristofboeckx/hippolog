@@ -278,7 +278,8 @@
     border-top:1px solid var(--hairline); background:var(--sheet-bg);
   }
   .sheet h2{ font-size:18px; margin:14px 0 8px; }
-  .sheet h3{ font-size:14px; margin:16px 0 6px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.05em; }
+  .sheet h3{ font-size:14px; margin:38px 0 10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.05em; }
+  .sheet-body > h3:first-child{ margin-top:20px; }   /* de eerste sectie hoeft die lucht niet */
   .weekday-row{
     display:flex; align-items:center; gap:8px; padding:8px 0; border-bottom:1px solid var(--border);
   }
@@ -379,6 +380,39 @@
   }
   .sheet-close:active{ background:var(--input-bg); }
 
+  /* ===== Herinnering: bottom sheet ===== */
+  .nudge-overlay{
+    position:fixed; inset:0; background:var(--overlay); z-index:110;
+    opacity:0; pointer-events:none; transition:opacity .25s ease;
+  }
+  .nudge-overlay.open{ opacity:1; pointer-events:auto; }
+  .nudge-sheet{
+    position:fixed; left:50%; bottom:0; transform:translate(-50%, 100%);
+    width:100%; max-width:480px; z-index:120;
+    background:var(--sheet-bg); border-radius:22px 22px 0 0;
+    box-shadow:0 -8px 30px rgba(0,0,0,0.25);
+    transition:transform .3s cubic-bezier(.2,.8,.25,1);
+    padding:18px 20px calc(20px + env(safe-area-inset-bottom,0px));
+  }
+  .nudge-overlay.open .nudge-sheet{ transform:translate(-50%, 0); }
+  .nudge-top{ display:flex; align-items:flex-start; gap:12px; }
+  .nudge-top h3{ margin:0; font-size:19px; flex:1; }
+  .nudge-x{
+    flex:0 0 34px; width:34px; height:34px; margin:-6px -6px 0 0;
+    border:none; background:none; color:var(--text-dim);
+    font-size:24px; line-height:1; border-radius:50%; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .nudge-x:active{ background:var(--input-bg); }
+  .nudge-sheet p{ font-size:15px; line-height:1.55; color:var(--text-dim); margin:10px 0 0; }
+  .nudge-btn{
+    display:block; width:100%; margin-top:18px;
+    background:var(--accent-green); color:#fff; border:none;
+    font-size:16px; font-weight:600; font-family:inherit;
+    padding:15px 16px; border-radius:14px; cursor:pointer;
+  }
+  .nudge-btn:active{ opacity:.85; }
+
   /* ===== Modals ===== */
   .modal-overlay{
     position:fixed; inset:0; background:var(--overlay); z-index:100;
@@ -474,7 +508,7 @@
       <div id="groupsEditContainer"></div>
       <button class="add-btn" id="addGroupBtn">+ Groep toevoegen</button>
 
-      <h3>Bestand</h3>
+      <h3>Backup van logs</h3>
       <div class="file-actions">
         <button class="wide-btn" id="exportBtn" data-native-tap>Exporteer .md</button>
         <button class="wide-btn" id="importBtn" data-native-tap>Importeer .md</button>
@@ -590,6 +624,18 @@
     </div>
   </div>
 
+  <!-- ===== Maandelijkse backupherinnering ===== -->
+  <div class="nudge-overlay" id="backupOverlay">
+    <div class="nudge-sheet" role="dialog" aria-modal="true" aria-labelledby="backupTitle">
+      <div class="nudge-top">
+        <h3 id="backupTitle">Verlies je logboek niet</h3>
+        <button class="nudge-x" id="backupClose" aria-label="Sluiten">&times;</button>
+      </div>
+      <p>Je logboek staat alleen op deze telefoon. Maak nu een backup en bewaar het bestand in Bestanden, iCloud of een andere veilige plek, zodat je werk niet verloren gaat.</p>
+      <button class="nudge-btn" id="backupNow" data-native-tap>Nu backup maken</button>
+    </div>
+  </div>
+
   <div class="save-toast" id="saveToast" role="alert">Probleem bij opslaan</div>
 </div>
 
@@ -605,7 +651,7 @@
   /* Versienummer van deze build. Wordt bij elke nieuwe versie bijgewerkt
      naar het tijdstip van de build (Europe/Brussels), formaat vJJJJ.MM.DD UU:MM.
      Verschijnt onderaan het instellingenmenu. */
-  var APP_VERSION = 'v2026.09.08 03:05';
+  var APP_VERSION = 'v2026.09.08 08:24';
 
   /* Beginscherm-iconen. Het manifest wordt bij het laden als blob aangemaakt,
      zodat alles in dit ene bestand kan blijven zitten. */
@@ -898,6 +944,9 @@
     groupsContainer: document.getElementById('groupsContainer'),
     saveBtn: document.getElementById('saveBtn'),
     saveToast: document.getElementById('saveToast'),
+    backupOverlay: document.getElementById('backupOverlay'),
+    backupClose: document.getElementById('backupClose'),
+    backupNow: document.getElementById('backupNow'),
     horseEgg: document.getElementById('horseEgg'),
     settingsBtn: document.getElementById('settingsBtn'),
     settingsOverlay: document.getElementById('settingsOverlay'),
@@ -1837,8 +1886,102 @@
   }
   installManifest();
 
+  /* ========================================================================
+     MAANDELIJKSE BACKUPHERINNERING
+     Eén keer per maand, vanaf de eerste volledige week van die maand, en
+     alleen wanneer er sinds de vorige backup echt iets bijgekomen is.
+     Wat we onthouden staat bij de instellingen, dus het overleeft een
+     herstart maar verdwijnt netjes mee bij het wissen van de gegevens.
+     ==================================================================== */
+
+  // De maandag van de eerste week die volledig in deze maand valt
+  function eersteVolleWeek(jaar, maand){
+    var d = new Date(jaar, maand, 1);
+    var shift = (8 - d.getDay()) % 7;      // dagen tot de eerstvolgende maandag
+    d.setDate(1 + shift);                  // eerste maandag van de maand
+    var zondag = new Date(jaar, maand, d.getDate() + 6);
+    if (zondag.getMonth() !== maand) d.setDate(d.getDate() + 7); // week loopt over de maandgrens
+    return d;
+  }
+
+  function maandSleutel(d){ return d.getFullYear() + '-' + pad(d.getMonth()+1); }
+
+  // Is er sinds de laatste backup nog iets gelogd?
+  function ietsTeVerliezen(){
+    var laatste = state.settings.laatsteBackup || '';
+    var keys = Object.keys(state.days);
+    for (var i = 0; i < keys.length; i++){
+      if (isDayEmpty(state.days[keys[i]])) continue;
+      if (!laatste || keys[i] > laatste) return true;
+    }
+    return false;
+  }
+
+  function toonBackupHerinnering(){
+    el.backupOverlay.classList.add('open');
+  }
+  function sluitBackupHerinnering(){
+    el.backupOverlay.classList.remove('open');
+  }
+
+  el.backupClose.addEventListener('click', sluitBackupHerinnering);
+  el.backupOverlay.addEventListener('click', function(ev){
+    if (ev.target === el.backupOverlay) sluitBackupHerinnering();
+  });
+  el.backupNow.addEventListener('click', function(){
+    sluitBackupHerinnering();
+    noteerBackup();
+    startExportFlow();
+  });
+
+  // Onthoudt tot waar de gegevens veilig staan, zodat we niet blijven zeuren.
+  function noteerBackup(){
+    var keys = Object.keys(state.days).filter(function(k){ return !isDayEmpty(state.days[k]); }).sort();
+    state.settings.laatsteBackup = keys.length ? keys[keys.length-1] : toKey(new Date());
+    saveState();
+  }
+
+  // De maand waarin de app in gebruik genomen is. Staat die er nog niet, dan
+  // leiden we hem af uit de oudste gelogde dag, zodat iemand die de app al
+  // langer gebruikt niet plots als nieuwe gebruiker telt.
+  function eersteMaandInGebruik(){
+    if (state.settings.eersteMaand) return state.settings.eersteMaand;
+    var keys = Object.keys(state.days).filter(function(k){ return !isDayEmpty(state.days[k]); }).sort();
+    var maand = keys.length ? keys[0].slice(0, 7) : maandSleutel(new Date());
+    state.settings.eersteMaand = maand;
+    saveState();
+    return maand;
+  }
+
+  function checkBackupHerinnering(){
+    var nu = new Date();
+    var maand = maandSleutel(nu);
+
+    // De eerste maand laten we met rust: begint iemand in maart, dan komt de
+    // eerste herinnering pas in april.
+    if (eersteMaandInGebruik() === maand) return;
+
+    // Deze maand al getoond? Dan niet opnieuw, ook niet als ze heen en weer bladert.
+    if (state.settings.backupHerinnering === maand) return;
+
+    // Pas vanaf de eerste volledige week van de maand
+    if (nu < eersteVolleWeek(nu.getFullYear(), nu.getMonth())) return;
+
+    // Niets gelogd sinds de vorige backup: geen reden om te storen
+    if (!ietsTeVerliezen()) return;
+
+    state.settings.backupHerinnering = maand;
+    saveState();
+    // Even wachten zodat de sheet binnenschuift over een opgebouwd scherm
+    setTimeout(toonBackupHerinnering, 600);
+  }
+
+  // Een export via de instellingen telt ook als backup
+  el.exportBtn.addEventListener('click', noteerBackup);
+
   /* ---------- Init ---------- */
   renderDay();
+  checkBackupHerinnering();
 
 })();
 </script>
