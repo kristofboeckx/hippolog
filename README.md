@@ -13,12 +13,15 @@ Gemaakt voor mijn dochter, die drie dagen per week op een paardenbedrijf werkt.
 - Standaarduren per weekdag, maar elke dag blijft invulbaar
 - Aanpasbare takenlijst: groepen en taken toevoegen, hernoemen, verwijderen en verslepen
 - Autosave, met alleen een melding als het misloopt
-- Backup naar `.md` en terug importeren
+- Eén tap zet je hele week met instructie op het klembord, klaar om in een AI te plakken
+- Backup naar `.md` en terug importeren, via de instellingen
 - Volgt licht en donker van het toestel, werkt offline, kan op het beginscherm
 
-## Het .md bestand
+## Van logboek naar weekverslag
 
-Backup én invoer voor het weekverslag. De leerling voegt het toe aan ChatGPT, Gemini of Claude met de prompt die in de app staat, onder Instellingen. Eén bestand mag een heel schooljaar bevatten.
+De knop onderaan, **Verslag voorbereiden**, zet de week waar je naar kijkt (maandag tot en met zondag) samen met de instructie voor de AI op het klembord. Daarna kies je in de melding ChatGPT of Gemini, plak je de tekst en lees je het verslag na. Geen bestand nodig.
+
+Het `.md` bestand blijft bestaan als backup en als manier om je logboek naar een ander toestel te verhuizen. Exporteren en importeren staan in de instellingen. Eén bestand mag een heel schooljaar bevatten:
 
 ```markdown
 ## 2026-09-09 (woensdag)
